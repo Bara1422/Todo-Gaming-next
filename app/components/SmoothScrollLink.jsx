@@ -1,14 +1,31 @@
 'use client'
 
 import Link from 'next/link'
+import { useRouter, usePathname } from 'next/navigation'
+
 import React from 'react'
 
-const SmoothScrollLink = ({ href, children, ...props }) => {
+const SmoothScrollLink = ({
+  href,
+  children,
+  setIsOpen,
+
+  ...props
+}) => {
+  const router = useRouter()
+  const pathname = usePathname()
   const hrefwonumeral = href.replace('#', '')
+
   const handleClick = (e) => {
-    e.preventDefault()
     const element = document.getElementById(hrefwonumeral)
-    element.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    e.preventDefault()
+    if (pathname === '/') {
+      setIsOpen(false)
+      element.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    } else {
+      setIsOpen(false)
+      router.push('/')
+    }
   }
   return (
     <Link href={href} onClick={handleClick} {...props}>
