@@ -6,6 +6,7 @@ import Xmark from '../Icons/Xmark'
 
 import Link from 'next/link'
 import Cart from './Cart'
+import SmoothScrollLink from './SmoothScrollLink'
 
 const BurgerMenu = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -33,9 +34,12 @@ const BurgerMenu = () => {
         <div className='  md:mt-0 mt-20 flex-col items-center md:flex-row flex justify-end gap-3'>
           <ul className='flex flex-col md:flex-row text-5xl justify-center md:pt-0 pt-40 md:text-xl md:gap-9 gap-14 md:items-center order-2 md:order-1'>
             <li>
-              <Link href='#about' className='hover:text-amethyst-600'>
+              <SmoothScrollLink
+                href='#about'
+                className='hover:text-amethyst-600'
+              >
                 Nosotros
-              </Link>
+              </SmoothScrollLink>
             </li>
             <li>
               <Link href='/products' className='hover:text-amethyst-600'>
@@ -43,9 +47,13 @@ const BurgerMenu = () => {
               </Link>
             </li>
             <li>
-              <Link href='#nosotros' className='hover:text-amethyst-600'>
+              <SmoothScrollLink
+                href='#contact'
+                scroll
+                className='hover:text-amethyst-600'
+              >
                 Contacto
-              </Link>
+              </SmoothScrollLink>
             </li>
           </ul>
           <div className='flex pl-2 order-1 gap-10 md:mt-0 mt-10 md:gap-3 items-center md:order-2'>
