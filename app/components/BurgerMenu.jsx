@@ -8,7 +8,6 @@ import BurgerMenuIcon from '../Icons/BurgerMenuIcon'
 
 import SmoothScrollLink from './SmoothScrollLink'
 import CartContainer from './CartContainer'
-import { CartIcon } from '../Icons/CartIcon'
 
 const BurgerMenu = () => {
   const [isOpen, setIsOpen] = useState(false)

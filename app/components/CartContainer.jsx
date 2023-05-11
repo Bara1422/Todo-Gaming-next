@@ -7,6 +7,7 @@ import { cartHidden } from '@/redux/features/cartSlice'
 
 const CartContainer = () => {
   const dispatch = useDispatch()
+
   const quantity = useSelector((state) =>
     state.cart.cartItems.reduce((acc, cartItem) => {
       return acc + cartItem.quantity
