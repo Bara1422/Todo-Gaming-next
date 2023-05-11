@@ -15,10 +15,14 @@ const Navbar = () => {
             style={{ zIndex: 2 }}
           >
             <Image src='/Logo.png' width={40} height={40} alt='Logo Icon' />
-            <span className='text-xl font-bold'>Todo-Gaming</span>
+            <span className='text-3xl hidden md:block font-bold'>
+              Todo-Gaming
+            </span>
           </Link>
 
-          <BurgerMenu />
+          <div className='flex pl-2  order-1 gap-7 md:mt-0 md:gap-4 lg:gap-3 items-center md:order-2'>
+            <BurgerMenu />
+          </div>
         </div>
       </nav>
     </header>
