@@ -7,8 +7,11 @@ import Image from 'next/image'
 const Navbar = () => {
   return (
     <header className='relative'>
-      <nav className='bg-[#111] p-4 shadow-md text-white fixed w-full'>
-        <div className='flex justify-between w-full items-center '>
+      <nav className='bg-[#111] p-4 shadow-md text-white fixed w-full z-50'>
+        <div
+          className='flex justify-between w-full items-center'
+          style={{ zIndex: 999 }}
+        >
           <Link
             href='/'
             className='hover:text-amethyst-600 flex items-end gap-2 ml-3'
