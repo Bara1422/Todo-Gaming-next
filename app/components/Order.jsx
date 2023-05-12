@@ -73,7 +73,10 @@ const Order = () => {
         <div className='shadow-[0px_-2px_10px_0px_gray] flex justify-center'>
           <Link href='/checkout'>
             {cartItems.length !== 0 && (
-              <button className='m-2 h-auto rounded-lg p-2 w-[200px] text-center hover:opacity-70 active:opacity-100 disabled:opacity-40 bg-red-600'>
+              <button
+                className='m-2 h-auto rounded-lg p-2 w-[200px] text-center hover:opacity-70 active:opacity-100 disabled:opacity-40 bg-red-600'
+                onClick={handleToggleCart}
+              >
                 Ir a pagar {formatPrice(total)}
               </button>
             )}
