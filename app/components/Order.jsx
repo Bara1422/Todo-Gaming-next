@@ -5,11 +5,15 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import QuantityManage from './QuantityManage'
 import { cartHidden, reset } from '@/redux/features/cartSlice'
+import Link from 'next/link'
 
 const Order = () => {
   const dispatch = useDispatch()
   const hidden = useSelector((state) => state.cart.hidden)
   const cartItems = useSelector((state) => state.cart.cartItems)
+  const total = cartItems.reduce((acc, item) => {
+    return acc + item.price * item.quantity
+  }, 0)
 
   const handleToggleCart = () => {
     dispatch(cartHidden())
@@ -64,6 +68,16 @@ const Order = () => {
               </div>
             </div>
           ))}
+        </div>
+
+        <div className='shadow-[0px_-2px_10px_0px_gray] flex justify-center'>
+          <Link href='/checkout'>
+            {cartItems.length !== 0 && (
+              <button className='m-2 h-auto rounded-lg p-2 w-[200px] text-center hover:opacity-70 active:opacity-100 disabled:opacity-40 bg-red-600'>
+                Ir a pagar {formatPrice(total)}
+              </button>
+            )}
+          </Link>
         </div>
       </div>
     </>

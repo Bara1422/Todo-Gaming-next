@@ -23,17 +23,17 @@ const ItemsGrid = () => {
 
   return (
     <>
-      <div className='flex flex-col md:flex-row items-center justify-around mb-5 md:flex-wrap'>
+      <div className='grid  md:grid-cols-2 lg:grid-cols-4 gap-3 mt-4 items-center justify-around mb-5 md:flex-wrap'>
         <button
           onClick={() => setSelectedSection(null)}
-          className='flex  text-gray-800 bg-gray-200 m-5 items-center justify-center font-bold shadow-md rounded-2xl p-4 cursor-pointer'
+          className='flex w-52 text-gray-800 bg-gray-200 gap-3 items-center justify-center font-bold shadow-md rounded-2xl p-4 cursor-pointer'
         >
           <p>Todos</p>
         </button>
         {arraySections.map((section, index) => (
           <button
             onClick={() => handleSection(index + 1)}
-            className={`flex text-gray-800 m-5 items-center justify-center font-bold shadow-md rounded-2xl p-4 cursor-pointer ${
+            className={`flex w-52 text-gray-800 items-center justify-center font-bold shadow-md rounded-2xl p-4 cursor-pointer ${
               selectedSection === index + 1 ? 'bg-gray-300' : 'bg-gray-200'
             }`}
             key={section.section}
