@@ -5,7 +5,7 @@ import React from 'react'
 import RemoveIcon from '../Icons/RemoveIcon'
 import QuantityButton from './QuantityButton'
 import { useDispatch } from 'react-redux'
-import { removeCartItem, addCartItem } from '@/redux/features/cartSlice'
+import { removeCartItem, addCartItem } from '@/app/redux/features/cartSlice'
 
 const QuantityManage = ({ item }) => {
   const dispatch = useDispatch()

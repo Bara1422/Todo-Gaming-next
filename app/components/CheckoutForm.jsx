@@ -3,8 +3,22 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
 import CardSummary from './CardSummary'
+import { useSelector } from 'react-redux'
+import FormStyled from './FormStyled'
+import { useAuth } from '@/app/context/AuthContext'
+import { redirect } from 'next/navigation'
 
 const CheckoutForm = () => {
+  const { currentUser } = useAuth()
+  const cartItems = useSelector((state) => state.cart.cartItems)
+  const subTotal = cartItems.reduce((acc, item) => {
+    return acc + item.price * item.quantity
+  }, 0)
+
+  if (!currentUser) {
+    redirect('/login')
+  }
+
   const {
     register,
     handleSubmit,
@@ -17,11 +31,10 @@ const CheckoutForm = () => {
     console.log(data)
   }
 
+  const COSTOENVIO = 250
+
   return (
-    <form
-      className='mt-16 bg-white rounded-2xl md:w-[400px] w-full min-w-[300px] sm:min-w-[400px] shadow-lg flex flex-col'
-      onSubmit={handleSubmit(onSubmit)}
-    >
+    <FormStyled onSubmit={handleSubmit(onSubmit)}>
       <div className=' p-7 rounded-md bg-white shadow-lg w-full gap-3 flex flex-col text-black'>
         <label htmlFor='domicilio' className='font-bold px-1'>
           Domicilio
@@ -53,15 +66,16 @@ const CheckoutForm = () => {
           </span>
         )}
 
-        <CardSummary />
+        <CardSummary subTotal={subTotal} envio={COSTOENVIO} />
 
         <input
           type='submit'
           value='Pagar'
-          className='m-0 text-white h-auto rounded-lg border-none p-2 w-full bg-red-600 cursor-pointer'
+          disabled={subTotal === 0}
+          className='m-0 text-white h-auto rounded-lg border-none p-2 w-full bg-red-600 cursor-pointer hover:opacity-70 active:opacity-100 disabled:opacity-40 disabled:cursor-not-allowed'
         />
       </div>
-    </form>
+    </FormStyled>
   )
 }
 

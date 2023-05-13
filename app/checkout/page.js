@@ -1,16 +1,15 @@
 import React from 'react'
 import CheckoutForm from '../components/CheckoutForm'
+import LayoutPage from '../components/LayoutPage'
+import Wrapper from '../components/Wrapper'
 
 const Checkout = () => {
   return (
-    <div
-      className='px-5 flex items-start justify-center bg-center bg-cover bg-no-repeat bg-fixed m-auto min-h-screen h-full'
-      style={{ backgroundImage: 'url(/checkoutBg.jpg)' }}
-    >
-      <div className='flex flex-1 justify-around max-w-screen-xl m-36'>
+    <LayoutPage img='checkoutBg.jpg'>
+      <Wrapper>
         <CheckoutForm />
-      </div>
-    </div>
+      </Wrapper>
+    </LayoutPage>
   )
 }
 

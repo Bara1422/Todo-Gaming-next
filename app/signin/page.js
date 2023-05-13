@@ -2,16 +2,16 @@ import React from 'react'
 import LayoutPage from '../components/LayoutPage'
 import Wrapper from '../components/Wrapper'
 
-import LoginForm from '../components/LoginForm'
+import SigninForm from '../components/SigninForm'
 
-const Login = () => {
+const Signin = () => {
   return (
     <LayoutPage img='loginBg.jpeg'>
       <Wrapper>
-        <LoginForm />
+        <SigninForm />
       </Wrapper>
     </LayoutPage>
   )
 }
 
-export default Login
+export default Signin

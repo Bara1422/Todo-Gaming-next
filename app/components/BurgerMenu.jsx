@@ -8,12 +8,25 @@ import BurgerMenuIcon from '../Icons/BurgerMenuIcon'
 
 import SmoothScrollLink from './SmoothScrollLink'
 import CartContainer from './CartContainer'
+import { useAuth } from '../context/AuthContext'
+import UserCircleIcon from '../Icons/UserCircleIcon'
+import UserMenu from './UserMenu'
 
 const BurgerMenu = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const { authCheckState, currentUser, isAuthenticated, setHiddenMenu } =
+    useAuth()
+
+  useEffect(() => {
+    authCheckState()
+  }, [authCheckState])
 
   const handleMenuToggle = () => {
-    setIsOpen(!isOpen)
+    setIsOpen((prevState) => !prevState)
+  }
+
+  const handleUserMenuToggle = () => {
+    setHiddenMenu((prevState) => !prevState)
   }
 
   useEffect(() => {
@@ -80,11 +93,18 @@ const BurgerMenu = () => {
       <div className='md:inline-block h-6 border-l border-[#dfdddd] md:mr-3 border my-4 hidden' />
       <div className='flex gap-3 h-10' style={{ zIndex: 2 }}>
         <CartContainer />
-        <Link href='/login' onClick={() => setIsOpen(false)}>
-          <button className='px-3 py-2 text-sm border-solid border-[#bc02cb] rounded-md border '>
-            Ingresar
-          </button>
-        </Link>
+        {currentUser && isAuthenticated ? (
+          <>
+            <UserCircleIcon onClick={handleUserMenuToggle} />
+            <UserMenu />
+          </>
+        ) : (
+          <Link href='/login' onClick={() => setIsOpen(false)}>
+            <button className='px-3 py-2 text-sm border-solid border-[#bc02cb] rounded-md border '>
+              Ingresar
+            </button>
+          </Link>
+        )}
       </div>
     </>
   )

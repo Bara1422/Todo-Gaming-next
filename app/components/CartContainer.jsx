@@ -3,7 +3,7 @@
 import React from 'react'
 import { CartIcon } from '../Icons/CartIcon'
 import { useDispatch, useSelector } from 'react-redux'
-import { cartHidden } from '@/redux/features/cartSlice'
+import { cartHidden } from '@/app/redux/features/cartSlice'
 
 const CartContainer = () => {
   const dispatch = useDispatch()

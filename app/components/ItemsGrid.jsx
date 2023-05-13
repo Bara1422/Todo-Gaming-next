@@ -1,21 +1,36 @@
 'use client'
+/* eslint-disable indent */
 
-import { formatPrice, products, arraySections } from '@/data'
+import { formatPrice /* products, arraySections  */ } from '@/data'
 import React, { useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { addCartItem } from '@/redux/features/cartSlice'
+
+import { addCartItem } from '@/app/redux/features/cartSlice'
+import { useCategories, useGetProducts } from '@/app/hooks/useCategories'
+import { useAppDispatch } from '../redux/hooks'
+import { Toaster, toast } from 'react-hot-toast'
 
 const ItemsGrid = () => {
-  const dispatch = useDispatch()
+  const dispatch = useAppDispatch()
+  const { data: cates, isLoading: catesLoading } = useCategories()
+  const { data: productss, isLoading: productsLoading } = useGetProducts()
   const [selectedSection, setSelectedSection] = useState(null)
 
   const addToOrder = (component) => {
     dispatch(addCartItem(component))
+    toast.success('Item agregado al carrito', {
+      style: {
+        borderRadius: '10px',
+        background: '#333',
+        color: '#fff'
+      }
+    })
   }
 
   const filteredProducts = selectedSection
-    ? products.filter((product) => product.categoryId === selectedSection)
-    : products
+    ? productss?.result?.filter(
+        (product) => product.categoryId === selectedSection
+      )
+    : productss?.result
 
   const handleSection = (sectionId) => {
     setSelectedSection(sectionId)
@@ -24,26 +39,29 @@ const ItemsGrid = () => {
   return (
     <>
       <div className='grid  md:grid-cols-2 lg:grid-cols-4 gap-3 mt-4 items-center justify-around mb-5 md:flex-wrap'>
-        <button
-          onClick={() => setSelectedSection(null)}
-          className='flex w-52 text-gray-800 bg-gray-200 gap-3 items-center justify-center font-bold shadow-md rounded-2xl p-4 cursor-pointer'
-        >
-          <p>Todos</p>
-        </button>
-        {arraySections.map((section, index) => (
+        {!catesLoading && (
           <button
-            onClick={() => handleSection(index + 1)}
-            className={`flex w-52 text-gray-800 items-center justify-center font-bold shadow-md rounded-2xl p-4 cursor-pointer ${
-              selectedSection === index + 1 ? 'bg-gray-300' : 'bg-gray-200'
-            }`}
-            key={section.section}
+            onClick={() => setSelectedSection(null)}
+            className='flex w-52 text-gray-800 bg-gray-200 gap-3 items-center justify-center font-bold shadow-md rounded-2xl p-4 cursor-pointer'
           >
-            <p>{section.section}</p>
+            <p>Todos</p>
+          </button>
+        )}
+        {cates?.result?.map((section) => (
+          <button
+            onClick={() => handleSection(section.id)}
+            className={`flex w-52 text-gray-800 items-center justify-center font-bold shadow-md rounded-2xl p-4 cursor-pointer ${
+              selectedSection === section.id ? 'bg-gray-300' : 'bg-gray-200'
+            }`}
+            key={section.id}
+          >
+            <p>{section.category}</p>
           </button>
         ))}
       </div>
       <div className='grid mx-auto grid-cols-1 md:grid-cols-2 lg:grid-cols-3 text-center justify-items-center gap-5 p-12'>
-        {filteredProducts.map((product) => (
+        {productsLoading && <span>Cargando...</span>}
+        {filteredProducts?.map((product) => (
           <div
             className='flex justify-center items-center text-black'
             key={product.name}
@@ -66,6 +84,7 @@ const ItemsGrid = () => {
                 Agregar al carrito
               </button>
             </div>
+            <Toaster position='bottom-center' />
           </div>
         ))}
       </div>

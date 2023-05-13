@@ -4,7 +4,7 @@ import { formatPrice } from '@/data'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import QuantityManage from './QuantityManage'
-import { cartHidden, reset } from '@/redux/features/cartSlice'
+import { cartHidden, reset } from '@/app/redux/features/cartSlice'
 import Link from 'next/link'
 
 const Order = () => {
@@ -39,6 +39,7 @@ const Order = () => {
         <div className='overflow-auto min-h-[100px] max-h-full p-5 h-full'>
           <div className='px-2 py-2 w-full border-b border-gray-500 flex justify-between items-center'>
             <p className='text-black'>Tu pedido:</p>
+
             <button
               className='text-white h-auto rounded-lg p-2 w-[100px] text-xs  bg-red-600 text-center hover:opacity-70 active:opacity-100 disabled:opacity-40'
               disabled={cartItems.length === 0}
