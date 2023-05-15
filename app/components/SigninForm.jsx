@@ -10,6 +10,7 @@ import { useAuth } from '@/app/context/AuthContext'
 import { Spinner } from '@chakra-ui/react'
 import { Toaster, toast } from 'react-hot-toast'
 import { redirect } from 'next/navigation'
+import { VALIDATE_EMAIL } from '../utils/utils'
 
 const SigninForm = () => {
   const {
@@ -54,7 +55,7 @@ const SigninForm = () => {
         <div className=' pt-7 px-7 pb-2 rounded-md bg-white shadow-lg w-full gap-3 flex flex-col text-black'>
           <div className='flex flex-col gap-3'>
             <label htmlFor='nombre' className='font-bold px-1'>
-              Nombre
+              Nombre:
             </label>
             <div className='flex items-center justify-start flex-col relative bg-gray-100 rounded-2xl text-[#7d7d7d] px-1 shadow-lg focus:bg-white focus:outline-0'>
               <input
@@ -71,7 +72,7 @@ const SigninForm = () => {
             )}
 
             <label htmlFor='email' className='font-bold px-1'>
-              Email
+              Email:
             </label>
             <div className='flex items-center justify-start flex-col relative bg-gray-100 rounded-2xl text-[#7d7d7d] px-1 shadow-lg focus:bg-white focus:outline-0'>
               <input
@@ -80,8 +81,7 @@ const SigninForm = () => {
                 {...register('email', {
                   required: 'Este campo es requerido',
                   pattern: {
-                    value:
-                      /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+                    value: VALIDATE_EMAIL,
                     message: 'Email inválido'
                   }
                 })}
@@ -94,7 +94,7 @@ const SigninForm = () => {
             )}
 
             <label htmlFor='password' className='font-bold px-1'>
-              Password
+              Password:
             </label>
             <div className='flex items-center justify-start flex-col relative bg-gray-100 rounded-2xl text-[#7d7d7d] px-1 shadow-lg focus:bg-white focus:outline-0'>
               <input
@@ -120,7 +120,7 @@ const SigninForm = () => {
               </CustomButton>
             </div>
 
-            <div className='flex items-center justify-center p-2'>
+            <div className='flex items-center justify-center p-2 gap-2'>
               <span>
                 <p>Ya tienes cuenta?</p>
               </span>

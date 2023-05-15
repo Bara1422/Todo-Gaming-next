@@ -4,7 +4,7 @@ import { formatPrice } from '@/data'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import QuantityManage from './QuantityManage'
-import { cartHidden, reset } from '@/app/redux/features/cartSlice'
+import { toggleCartHidden, reset } from '@/app/redux/features/cartSlice'
 import Link from 'next/link'
 
 const Order = () => {
@@ -16,7 +16,7 @@ const Order = () => {
   }, 0)
 
   const handleToggleCart = () => {
-    dispatch(cartHidden())
+    dispatch(toggleCartHidden())
   }
 
   const handleClearCart = () => {
@@ -59,9 +59,9 @@ const Order = () => {
                   className='w-11 h-11  bg-cover flex items-center justify-center rounded-lg'
                   style={{ backgroundImage: `url(${item.imgUrl})` }}
                 />
-                <div>
-                  <div>{item.name}</div>
-                  <p className='text-green-600 font-bold'>
+                <div className=''>
+                  <div className='text-sm'>{item.name}</div>
+                  <p className='text-green-600 font-semibold'>
                     {formatPrice(item.price * item.quantity)}
                   </p>
                 </div>

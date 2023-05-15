@@ -9,6 +9,7 @@ import { useAuth } from '@/app/context/AuthContext'
 import { Toaster, toast } from 'react-hot-toast'
 import { Spinner } from '@chakra-ui/react'
 import { redirect } from 'next/navigation'
+import { VALIDATE_EMAIL } from '../utils/utils'
 
 const LoginForm = () => {
   const {
@@ -21,14 +22,15 @@ const LoginForm = () => {
   const { login, loading, currentUser, error } = useAuth()
 
   const onSubmit = (data) => {
-    console.log(data)
     login(data.email, data.password)
     reset()
   }
 
-  if (currentUser) {
-    redirect('/')
-  }
+  useEffect(() => {
+    if (currentUser) {
+      redirect('/')
+    }
+  }, [currentUser])
 
   useEffect(() => {
     if (error) {
@@ -49,7 +51,7 @@ const LoginForm = () => {
       <FormStyled onSubmit={handleSubmit(onSubmit)}>
         <div className=' pt-7 px-7 pb-2 rounded-md bg-white shadow-lg w-full gap-3 flex flex-col text-black'>
           <label htmlFor='email' className='font-bold px-1'>
-            Email
+            Email:
           </label>
           <div className='flex items-center justify-start flex-col relative bg-gray-100 rounded-2xl text-[#7d7d7d] px-1 shadow-lg focus:bg-white focus:outline-0'>
             <input
@@ -58,8 +60,7 @@ const LoginForm = () => {
               {...register('email', {
                 required: 'Este campo es requerido',
                 pattern: {
-                  value:
-                    /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+                  value: VALIDATE_EMAIL,
                   message: 'Email inválido'
                 }
               })}
@@ -72,7 +73,7 @@ const LoginForm = () => {
           )}
 
           <label htmlFor='password' className='font-bold px-1'>
-            Password
+            Password:
           </label>
           <div className='flex items-center justify-start flex-col relative bg-gray-100 rounded-2xl text-[#7d7d7d] px-1 shadow-lg focus:bg-white focus:outline-0'>
             <input
@@ -98,9 +99,9 @@ const LoginForm = () => {
             </CustomButton>
           </div>
 
-          <div className='flex items-center justify-center p-2'>
+          <div className='flex items-center justify-center p-2 gap-2'>
             <span>
-              <p>Todavia no tienes cuenta?</p>
+              <p>¿Todavia no tienes cuenta?</p>
             </span>
             <Link href='/signin'>
               <button className='text-red-600 ml-1 cursor-pointer hover:underline'>

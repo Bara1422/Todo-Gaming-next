@@ -11,15 +11,23 @@ import CartContainer from './CartContainer'
 import { useAuth } from '../context/AuthContext'
 import UserCircleIcon from '../Icons/UserCircleIcon'
 import UserMenu from './UserMenu'
+import { useAppDispatch } from '../redux/hooks'
+import { cartHidden } from '../redux/features/cartSlice'
 
 const BurgerMenu = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const dispatch = useAppDispatch()
   const { authCheckState, currentUser, isAuthenticated, setHiddenMenu } =
     useAuth()
 
   useEffect(() => {
     authCheckState()
   }, [authCheckState])
+
+  const handleHiddenMenus = () => {
+    setIsOpen(false)
+    dispatch(cartHidden())
+  }
 
   const handleMenuToggle = () => {
     setIsOpen((prevState) => !prevState)
@@ -64,7 +72,7 @@ const BurgerMenu = () => {
               <SmoothScrollLink
                 href='#about'
                 className='hover:text-amethyst-600'
-                setIsOpen={setIsOpen}
+                handleHiddenMenus={handleHiddenMenus}
               >
                 Nosotros
               </SmoothScrollLink>
@@ -72,7 +80,7 @@ const BurgerMenu = () => {
             <li>
               <Link
                 href='/products'
-                onClick={() => setIsOpen(false)}
+                onClick={handleHiddenMenus}
                 className='hover:text-amethyst-600'
               >
                 Productos
@@ -82,7 +90,7 @@ const BurgerMenu = () => {
               <SmoothScrollLink
                 href='#contact'
                 className='hover:text-amethyst-600'
-                setIsOpen={setIsOpen}
+                handleHiddenMenus={handleHiddenMenus}
               >
                 Contacto
               </SmoothScrollLink>
@@ -99,7 +107,7 @@ const BurgerMenu = () => {
             <UserMenu />
           </>
         ) : (
-          <Link href='/login' onClick={() => setIsOpen(false)}>
+          <Link href='/login' onClick={handleHiddenMenus}>
             <button className='px-3 py-2 text-sm border-solid border-[#bc02cb] rounded-md border '>
               Ingresar
             </button>

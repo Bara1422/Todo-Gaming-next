@@ -3,7 +3,7 @@
 import React from 'react'
 import { CartIcon } from '../Icons/CartIcon'
 import { useDispatch, useSelector } from 'react-redux'
-import { cartHidden } from '@/app/redux/features/cartSlice'
+import { toggleCartHidden } from '@/app/redux/features/cartSlice'
 
 const CartContainer = () => {
   const dispatch = useDispatch()
@@ -14,7 +14,7 @@ const CartContainer = () => {
     }, 0)
   )
   const handleToggle = () => {
-    dispatch(cartHidden())
+    dispatch(toggleCartHidden())
   }
 
   return (

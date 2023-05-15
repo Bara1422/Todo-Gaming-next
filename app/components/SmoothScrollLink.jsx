@@ -8,8 +8,8 @@ import React from 'react'
 const SmoothScrollLink = ({
   href,
   children,
-  setIsOpen,
 
+  handleHiddenMenus,
   ...props
 }) => {
   const router = useRouter()
@@ -19,11 +19,10 @@ const SmoothScrollLink = ({
   const handleClick = (e) => {
     const element = document.getElementById(hrefwonumeral)
     e.preventDefault()
+    handleHiddenMenus()
     if (pathname === '/') {
-      setIsOpen(false)
       element.scrollIntoView({ behavior: 'smooth', block: 'center' })
     } else {
-      setIsOpen(false)
       router.push('/')
     }
   }

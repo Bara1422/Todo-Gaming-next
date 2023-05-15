@@ -12,7 +12,7 @@ import { Toaster, toast } from 'react-hot-toast'
 const ItemsGrid = () => {
   const dispatch = useAppDispatch()
   const { data: cates, isLoading: catesLoading } = useCategories()
-  const { data: productss, isLoading: productsLoading } = useGetProducts()
+  const { data: productss } = useGetProducts()
   const [selectedSection, setSelectedSection] = useState(null)
 
   const addToOrder = (component) => {
@@ -60,7 +60,6 @@ const ItemsGrid = () => {
         ))}
       </div>
       <div className='grid mx-auto grid-cols-1 md:grid-cols-2 lg:grid-cols-3 text-center justify-items-center gap-5 p-12'>
-        {productsLoading && <span>Cargando...</span>}
         {filteredProducts?.map((product) => (
           <div
             className='flex justify-center items-center text-black'
