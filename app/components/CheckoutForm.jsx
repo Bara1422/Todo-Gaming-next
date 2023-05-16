@@ -2,10 +2,8 @@
 
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
-import CardSummary from './CardSummary'
 import { useSelector } from 'react-redux'
-import FormStyled from './FormStyled'
-import { useAuth } from '@/app/context/AuthContext'
+import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import {
   Button,
@@ -20,14 +18,15 @@ import {
   Text,
   useDisclosure
 } from '@chakra-ui/react'
-import { useCreateOrder } from '../hooks/useCreateOrder'
-import { authData } from '../utils/safeGetLocalStorage'
-import { formatPrice } from '@/data'
 
+import CardSummary from './CardSummary'
+import FormStyled from './FormStyled'
+import { useAuth } from '@/app/context/AuthContext'
+import { useCreateOrder } from '../hooks/useCreateOrder'
+import { formatPrice } from '@/data'
 import { useAppDispatch } from '../redux/hooks'
 import { resetCart } from '../redux/features/cartSlice'
 import CustomButton from './CustomButton'
-import Link from 'next/link'
 
 const COSTOENVIO = 250
 const CheckoutForm = () => {
@@ -68,7 +67,7 @@ const CheckoutForm = () => {
     setShipping(data)
     reset()
     await createOrder(
-      authData.userId,
+      currentUser.userId,
       data.domicilio,
       data.localidad,
       items,
