@@ -1,5 +1,8 @@
+'use client'
+
 import { useAxios } from '@/app/context/AxiosContext'
 import { useQuery } from '@tanstack/react-query'
+import { authData } from '../utils/safeGetLocalStorage'
 
 export const useCategories = () => {
   const axios = useAxios()
@@ -20,8 +23,6 @@ export const useGetProducts = () => {
 }
 
 export const useOrdersById = () => {
-  const stringData = localStorage.getItem('authData')
-  const authData = JSON.parse(stringData)
   const axios = useAxios()
   return useQuery(['orders', authData?.userId], async () => {
     try {

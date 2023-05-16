@@ -4,7 +4,7 @@ import { formatPrice } from '@/data'
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import QuantityManage from './QuantityManage'
-import { toggleCartHidden, reset } from '@/app/redux/features/cartSlice'
+import { toggleCartHidden, resetCart } from '@/app/redux/features/cartSlice'
 import Link from 'next/link'
 
 const Order = () => {
@@ -20,7 +20,7 @@ const Order = () => {
   }
 
   const handleClearCart = () => {
-    dispatch(reset())
+    dispatch(resetCart())
   }
 
   return (

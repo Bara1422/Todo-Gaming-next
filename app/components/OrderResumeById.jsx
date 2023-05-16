@@ -34,7 +34,6 @@ const OrderResumeById = ({ id, isLoading, orders }) => {
     filterProductsById()
   }, [orders, products])
 
-  console.log(imageOrders)
   const filteredOrders = ordersById.filter((order) => order.id === Number(id))
 
   return (

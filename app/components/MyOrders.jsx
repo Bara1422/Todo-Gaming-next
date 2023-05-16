@@ -18,31 +18,29 @@ const MyOrders = ({ orders }) => {
                 className=' bg-white border border-[#e5edef] rounded-lg mb-7 overflow-hidden'
                 key={order.id}
               >
-                <div className='w-full p-7 relative flex justify-between gap-2 flex-wrap lg:flex-nowrap'>
+                <div className='w-full sm:p-7 p-4 relative flex justify-between gap-2 '>
                   <ul className='flex flex-col justify-center w-full'>
-                    <li className='w-full inline-block align-top leading-[1.7] text-ellipsis overflow-hidden whitespace-nowrap text-[#7d7d7d]'>
+                    <li className='w-full flex align-top leading-[1.7] text-ellipsis overflow-hidden whitespace-nowrap text-[#7d7d7d]'>
                       <span className='min-w-[50px] pr-1 font-semibold inline-block text-[#332927]'>
                         Fecha:
                       </span>
-                      {order.createdAt}
+                      <span className='text-sm sm:text-base text-center my-auto'>
+                        {order.createdAt}
+                      </span>
                     </li>
                     <li className='w-full inline-block align-top leading-[1.7] text-ellipsis overflow-hidden whitespace-nowrap text-[#7d7d7d]'>
                       <span className='min-w-[50px] pr-1 font-semibold inline-block text-[#332927]'>
                         Total:
                       </span>
-                      {formatPrice(order.total)}
+                      <span className='text-sm sm:text-base text-center my-auto'>
+                        {formatPrice(order.total)}
+                      </span>
                     </li>
                   </ul>
 
-                  <div className='flex justify-center items-center'>
-                    <span className='px-2 py-4 text-center'>
-                      {order.statusId}
-                    </span>
-                  </div>
-
                   <div className='flex items-center justify-center flex-col'>
                     <Link href={`my-orders/${order.id}/order-items`}>
-                      <button className='m-0 w-36 text-white h-auto rounded-lg border-none p-2 cursor-pointer bg-red-600 text-center hover:opacity-70 active:opacity-100'>
+                      <button className='m-0 w-28 sm:w-36 text-white h-auto rounded-lg border-none p-2 cursor-pointer bg-red-600 text-center hover:opacity-70 active:opacity-100'>
                         Ver resumen
                       </button>
                     </Link>

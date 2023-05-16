@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import MyOrders from '../components/MyOrders'
 import Wrapper from '../components/Wrapper'
 import LayoutPage from '../components/LayoutPage'
@@ -11,7 +11,7 @@ import { redirect } from 'next/navigation'
 
 const Orders = () => {
   const { data, isLoading } = useOrdersById()
-
+  const [local, setLocal] = useState(null)
   const { currentUser } = useAuth()
 
   useEffect(() => {
@@ -19,6 +19,14 @@ const Orders = () => {
       redirect('/login')
     }
   })
+
+  useEffect(() => {
+    const storedData = localStorage.getItem('myData')
+    if (storedData) {
+      setLocal(JSON.parse(storedData))
+    }
+  }, [])
+  console.log(local)
 
   return (
     <LayoutPage img='ordersBg.jpg'>

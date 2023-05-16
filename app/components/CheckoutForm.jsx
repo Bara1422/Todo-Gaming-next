@@ -1,19 +1,52 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import CardSummary from './CardSummary'
 import { useSelector } from 'react-redux'
 import FormStyled from './FormStyled'
 import { useAuth } from '@/app/context/AuthContext'
 import { redirect } from 'next/navigation'
+import {
+  Button,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  Spinner,
+  Text,
+  useDisclosure
+} from '@chakra-ui/react'
+import { useCreateOrder } from '../hooks/useCreateOrder'
+import { authData } from '../utils/safeGetLocalStorage'
+import { formatPrice } from '@/data'
+
+import { useAppDispatch } from '../redux/hooks'
+import { resetCart } from '../redux/features/cartSlice'
+import CustomButton from './CustomButton'
+import Link from 'next/link'
 
 const CheckoutForm = () => {
   const { currentUser } = useAuth()
+  const dispatch = useAppDispatch()
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { createOrder, initPoint, isLoading } = useCreateOrder()
   const cartItems = useSelector((state) => state.cart.cartItems)
+  const [shipping, setShipping] = useState(null)
   const subTotal = cartItems.reduce((acc, item) => {
     return acc + item.price * item.quantity
   }, 0)
+  const items = cartItems.map((product) => {
+    return {
+      title: product.name,
+      quantity: product.quantity,
+      unitPrice: product.price,
+      productId: product.id
+    }
+  })
 
   if (!currentUser) {
     redirect('/login')
@@ -26,8 +59,22 @@ const CheckoutForm = () => {
     reset
   } = useForm()
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
+    setShipping(data)
     reset()
+    await createOrder(
+      authData.userId,
+      data.domicilio,
+      data.localidad,
+      items,
+      subTotal
+    )
+    onOpen()
+  }
+
+  const handleCart = () => {
+    dispatch(resetCart())
+    redirect('/my-orders')
   }
 
   const COSTOENVIO = 250
@@ -67,13 +114,68 @@ const CheckoutForm = () => {
 
         <CardSummary subTotal={subTotal} envio={COSTOENVIO} />
 
-        <input
+        {/*  <input
           type='submit'
           value='Pagar'
           disabled={subTotal === 0}
           className='m-0 text-white h-auto rounded-lg border-none p-2 w-full bg-red-600 cursor-pointer hover:opacity-70 active:opacity-100 disabled:opacity-40 disabled:cursor-not-allowed'
-        />
+        /> */}
+        <CustomButton w='full'>
+          {isLoading ? <Spinner size='xs' /> : 'Pagar'}
+        </CustomButton>
       </div>
+
+      <Modal onClose={onClose} isOpen={isOpen}>
+        <ModalOverlay />
+        <ModalContent color='black'>
+          <ModalHeader fontSize='3xl'>
+            Verifica que los datos sean correctos
+          </ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Text fontSize='lg'>
+              <span className='font-semibold text-xl'>Direccion:</span>{' '}
+              {shipping?.domicilio}
+            </Text>
+            <Text fontSize='lg'>
+              <span className='font-semibold text-xl'>Localidad: </span>
+              {shipping?.localidad}
+            </Text>
+            <Text fontSize='xl'>
+              <span className='font-semibold'>Productos:</span>{' '}
+              {items.map((product, index) => (
+                <span className='text-base' key={index}>
+                  {product.title}.
+                  <span className='flex'>Cantidad: {product.quantity}.</span>
+                  <span>
+                    Precio unitario: {formatPrice(product.unitPrice)}.
+                  </span>
+                </span>
+              ))}
+            </Text>
+            <Text fontSize='2xl' pt={4}>
+              <span className='font-bold'>Subtotal:</span>{' '}
+              {formatPrice(subTotal)}
+            </Text>
+          </ModalBody>
+
+          <ModalFooter>
+            <Button colorScheme='blue' mr={3} onClick={onClose}>
+              Cerrar
+            </Button>
+            <Link href='/my-orders'>
+              <Button
+                colorScheme='green'
+                onClick={() =>
+                  [window.open(initPoint), onClose()][handleCart()]
+                }
+              >
+                Pagar
+              </Button>
+            </Link>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
     </FormStyled>
   )
 }

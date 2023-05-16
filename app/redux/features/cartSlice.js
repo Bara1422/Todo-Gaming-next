@@ -10,7 +10,7 @@ export const cartSlice = createSlice({
   name: 'cart',
   initialState,
   reducers: {
-    reset: () => initialState,
+    resetCart: () => initialState,
     cartHidden: (state) => {
       state.hidden = false
     },
@@ -27,7 +27,7 @@ export const cartSlice = createSlice({
 })
 
 export const {
-  reset,
+  resetCart,
   cartHidden,
   toggleCartHidden,
   addCartItem,
