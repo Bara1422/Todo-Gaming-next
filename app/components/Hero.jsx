@@ -6,7 +6,7 @@ const Hero = () => {
     <div className=' w-full min-h-[70vh] relative'>
       <div className='absolute top-0 left-0 w-full h-full'>
         <Image
-          src='/Hero.jpg'
+          src='/Hero.webp'
           alt='Contact Background Image'
           fill
           style={{ objectFit: 'cover' }}
