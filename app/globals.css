@@ -9,3 +9,24 @@
 html {
   scroll-behavior: smooth;
 }
+
+.animation-under {
+  position: relative;
+}
+
+.animation-under::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(to right, #bf53c1, #e18ee4, #d061d4);
+  z-index: 1;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease-in-out;
+}
+.animation-under:hover::before {
+  transform: scaleX(1);
+}

@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import Link from 'next/link'
 
 import Xmark from '../Icons/Xmark'
@@ -24,10 +24,10 @@ const BurgerMenu = () => {
     authCheckState()
   }, [authCheckState])
 
-  const handleHiddenMenus = () => {
+  const handleHiddenMenus = useCallback(() => {
     setIsOpen(false)
     dispatch(cartHidden())
-  }
+  }, [dispatch, setIsOpen])
 
   const handleMenuToggle = () => {
     setIsOpen((prevState) => !prevState)
@@ -71,7 +71,7 @@ const BurgerMenu = () => {
             <li>
               <SmoothScrollLink
                 href='#about'
-                className='hover:text-amethyst-600'
+                className='py-1 animation-under'
                 handleHiddenMenus={handleHiddenMenus}
               >
                 Nosotros
@@ -80,8 +80,8 @@ const BurgerMenu = () => {
             <li>
               <Link
                 href='/products'
+                className='py-1 animation-under'
                 onClick={handleHiddenMenus}
-                className='hover:text-amethyst-600'
               >
                 Productos
               </Link>
@@ -89,7 +89,7 @@ const BurgerMenu = () => {
             <li>
               <SmoothScrollLink
                 href='#contact'
-                className='hover:text-amethyst-600'
+                className='py-1 animation-under'
                 handleHiddenMenus={handleHiddenMenus}
               >
                 Contacto
@@ -108,7 +108,7 @@ const BurgerMenu = () => {
           </>
         ) : (
           <Link href='/login' onClick={handleHiddenMenus} className=''>
-            <button className='px-3 py-2 text-sm border-solid border-[#bc02cb] rounded-md border '>
+            <button className='px-3 py-2 text-sm border-solid hover:border-amethyst-600 rounded-md border '>
               Ingresar
             </button>
           </Link>

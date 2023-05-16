@@ -56,20 +56,20 @@ const OrderResumeById = ({ id, isLoading, orders }) => {
               {imageOrders?.map((item) => (
                 <li
                   key={item.id}
-                  className='md:grid flex flex-col md:grid-cols-[auto_1fr_auto] gap-2 items-center justify-between border-b border-slate-100 last:border-none'
+                  className='md:grid flex flex-col md:grid-cols-[auto_1fr_auto] items-center justify-between border-b border-slate-100 last:border-none'
                 >
                   <Image
                     width={70}
                     height={70}
-                    className='rounded-[50%] grid-flow-col-dense'
+                    className=' place-self-start'
                     src={item.imgUrl}
                     alt='Item Image'
                   />
-                  <div className='flex'>
+                  <div className='flex w-full sm:pl-2'>
                     <div className='w-full text-sm sm:text-base py-4'>
                       <p>{item.title}</p>
                     </div>
-                    <div className='text-right p-2'>
+                    <div className='text-right'>
                       <span className='block text-[#7d7d7d]'>
                         x{item.quantity}
                       </span>

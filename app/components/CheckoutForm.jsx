@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import CardSummary from './CardSummary'
 import { useSelector } from 'react-redux'
@@ -29,6 +29,7 @@ import { resetCart } from '../redux/features/cartSlice'
 import CustomButton from './CustomButton'
 import Link from 'next/link'
 
+const COSTOENVIO = 250
 const CheckoutForm = () => {
   const { currentUser } = useAuth()
   const dispatch = useAppDispatch()
@@ -36,9 +37,11 @@ const CheckoutForm = () => {
   const { createOrder, initPoint, isLoading } = useCreateOrder()
   const cartItems = useSelector((state) => state.cart.cartItems)
   const [shipping, setShipping] = useState(null)
+
   const subTotal = cartItems.reduce((acc, item) => {
     return acc + item.price * item.quantity
   }, 0)
+
   const items = cartItems.map((product) => {
     return {
       title: product.name,
@@ -48,9 +51,11 @@ const CheckoutForm = () => {
     }
   })
 
-  if (!currentUser) {
-    redirect('/login')
-  }
+  useEffect(() => {
+    if (!currentUser) {
+      redirect('/login')
+    }
+  }, [currentUser])
 
   const {
     register,
@@ -77,7 +82,11 @@ const CheckoutForm = () => {
     redirect('/my-orders')
   }
 
-  const COSTOENVIO = 250
+  const onPurcharse = () => {
+    window.open(initPoint)
+    onClose()
+    handleCart()
+  }
 
   return (
     <FormStyled onSubmit={handleSubmit(onSubmit)}>
@@ -114,12 +123,6 @@ const CheckoutForm = () => {
 
         <CardSummary subTotal={subTotal} envio={COSTOENVIO} />
 
-        {/*  <input
-          type='submit'
-          value='Pagar'
-          disabled={subTotal === 0}
-          className='m-0 text-white h-auto rounded-lg border-none p-2 w-full bg-red-600 cursor-pointer hover:opacity-70 active:opacity-100 disabled:opacity-40 disabled:cursor-not-allowed'
-        /> */}
         <CustomButton w='full'>
           {isLoading ? <Spinner size='xs' /> : 'Pagar'}
         </CustomButton>
@@ -143,15 +146,17 @@ const CheckoutForm = () => {
             </Text>
             <Text fontSize='xl'>
               <span className='font-semibold'>Productos:</span>{' '}
-              {items.map((product, index) => (
-                <span className='text-base' key={index}>
-                  {product.title}.
-                  <span className='flex'>Cantidad: {product.quantity}.</span>
-                  <span>
-                    Precio unitario: {formatPrice(product.unitPrice)}.
+              <div className='flex flex-col gap-2'>
+                {items.map((product) => (
+                  <span className='text-base flex flex-col' key={product.id}>
+                    {product.title}.
+                    <span className='flex'>Cantidad: {product.quantity}.</span>
+                    <span className='flex'>
+                      Precio unitario: {formatPrice(product.unitPrice)}.
+                    </span>
                   </span>
-                </span>
-              ))}
+                ))}
+              </div>
             </Text>
             <Text fontSize='2xl' pt={4}>
               <span className='font-bold'>Subtotal:</span>{' '}
@@ -164,12 +169,7 @@ const CheckoutForm = () => {
               Cerrar
             </Button>
             <Link href='/my-orders'>
-              <Button
-                colorScheme='green'
-                onClick={() =>
-                  [window.open(initPoint), onClose()][handleCart()]
-                }
-              >
+              <Button colorScheme='green' onClick={onPurcharse}>
                 Pagar
               </Button>
             </Link>

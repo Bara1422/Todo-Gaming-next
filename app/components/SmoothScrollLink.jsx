@@ -8,8 +8,7 @@ import React from 'react'
 const SmoothScrollLink = ({
   href,
   children,
-
-  handleHiddenMenus,
+  handleHiddenMenus = () => {},
   ...props
 }) => {
   const router = useRouter()
