@@ -53,6 +53,7 @@ const BurgerMenu = () => {
     <>
       <button
         className=' focus:outline-none md:hidden'
+        aria-label='Abrir o cerrar Menu desplegable'
         onClick={handleMenuToggle}
         style={{ zIndex: 2 }}
       >

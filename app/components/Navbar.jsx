@@ -17,7 +17,13 @@ const Navbar = () => {
             className='hover:text-amethyst-600 flex items-end gap-2 ml-3'
             style={{ zIndex: 2 }}
           >
-            <Image src='/Logo.png' width={40} height={40} alt='Logo Icon' />
+            <Image
+              src='/Logo.png'
+              width={40}
+              height={40}
+              alt='Logo Icon'
+              style={{ height: 'auto', width: 'auto' }}
+            />
             <span className='text-3xl hidden md:block font-bold'>
               Todo-Gaming
             </span>

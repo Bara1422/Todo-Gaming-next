@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import QuantityManage from './QuantityManage'
 import { toggleCartHidden, resetCart } from '@/app/redux/features/cartSlice'
 import Link from 'next/link'
+import Image from 'next/image'
 
 const Order = () => {
   const dispatch = useDispatch()
@@ -55,10 +56,16 @@ const Order = () => {
               key={item.id}
             >
               <div className='px-2 py-1 grid grid-cols-[50px_100px_100px] justify-between'>
-                <div
-                  className='w-11 h-11  bg-cover flex items-center justify-center rounded-lg'
-                  style={{ backgroundImage: `url(${item.imgUrl})` }}
-                />
+                <div className='w-11 h-11  flex items-center justify-center rounded-lg'>
+                  <Image
+                    src={item.imgUrl}
+                    alt={`Image of ${item.name}`}
+                    width={44}
+                    height={44}
+                    style={{ objectFit: 'cover' }}
+                  />
+                </div>
+
                 <div className=''>
                   <div className='text-sm'>{item.name}</div>
                   <p className='text-green-600 font-semibold'>

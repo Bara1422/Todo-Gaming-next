@@ -9,6 +9,7 @@ import { useCategories, useGetProducts } from '@/app/hooks/useCategories'
 import { useAppDispatch } from '../redux/hooks'
 import { Toaster, toast } from 'react-hot-toast'
 import { Spinner } from '@chakra-ui/react'
+import Image from 'next/image'
 
 const ItemsGrid = () => {
   const dispatch = useAppDispatch()
@@ -67,19 +68,23 @@ const ItemsGrid = () => {
             className='flex justify-center items-center text-black'
             key={product.name}
           >
-            <div
-              className='max-h-[300px] h-[300px]  bg-cover bg-top bg-no-repeat filter max-w-[18rem] flex flex-col mt-1 justify-end items-center bg-white shadow-md rounded-md hover:shadow-lg hover:mt-0 hover:cursor-default hover:filter-none contrast-75 hover:contrast-100 '
-              style={{
-                backgroundImage: `url(${product.imgUrl})`,
-                backgroundSize: '10rem'
-              }}
-            >
+            <div className='max-h-[300px] h-[300px] relative mx-auto bg-no-repeat filter max-w-[18rem] flex flex-col mt-1 justify-end items-center bg-white shadow-md rounded-md hover:shadow-lg hover:mt-0 hover:cursor-default hover:filter-none contrast-75 hover:contrast-100 '>
+              <div className='absolute top-0 left-0 w-full h-full'>
+                <Image
+                  src={product.imgUrl}
+                  alt={`Image of ${product.name}`}
+                  width={140}
+                  height={140}
+                  priority
+                  style={{ objectFit: 'contain', margin: '0 auto' }}
+                />
+              </div>
               <h5 className='p-1 text-xs sm:text-base'>{product.name}</h5>
               <p className='text-green-600 font-bold'>
                 {formatPrice(product.price)}
               </p>
               <button
-                className='m-2 text-white h-auto rounded-lg p-2 w-48 cursor-pointer bg-red-600 text-center hover:opacity-70 active:opacity-100'
+                className='m-2 text-white h-auto rounded-lg p-2 w-48 cursor-pointer bg-red-600 text-center hover:opacity-70 active:opacity-100 z-20'
                 onClick={() => addToOrder(product)}
               >
                 Agregar al carrito

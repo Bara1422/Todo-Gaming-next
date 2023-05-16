@@ -63,7 +63,7 @@ const OrderResumeById = ({ id, isLoading, orders }) => {
                     height={70}
                     className=' place-self-start'
                     src={item.imgUrl}
-                    alt='Item Image'
+                    alt={`Item Image of ${item.title}`}
                   />
                   <div className='flex w-full sm:pl-2'>
                     <div className='w-full text-sm sm:text-base py-4'>
