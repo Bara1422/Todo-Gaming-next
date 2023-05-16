@@ -8,7 +8,7 @@ const UserCircleIcon = ({ onClick }) => {
       viewBox='0 0 24 24'
       strokeWidth={1.5}
       stroke='currentColor'
-      className='w-7 h-7'
+      className='w-7 h-7 hover:text-amethyst-600 cursor-pointer'
       onClick={onClick}
     >
       <path

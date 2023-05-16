@@ -107,7 +107,7 @@ const BurgerMenu = () => {
             <UserMenu />
           </>
         ) : (
-          <Link href='/login' onClick={handleHiddenMenus}>
+          <Link href='/login' onClick={handleHiddenMenus} className=''>
             <button className='px-3 py-2 text-sm border-solid border-[#bc02cb] rounded-md border '>
               Ingresar
             </button>

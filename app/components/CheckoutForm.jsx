@@ -28,7 +28,6 @@ const CheckoutForm = () => {
 
   const onSubmit = (data) => {
     reset()
-    console.log(data)
   }
 
   const COSTOENVIO = 250

@@ -1,7 +1,9 @@
 /* import Link from 'next/link' */
+import { formatPrice } from '@/data'
+import Link from 'next/link'
 import React from 'react'
 
-const MyOrders = () => {
+const MyOrders = ({ orders }) => {
   return (
     <section className='sm:w-[70%] min-h-screen w-full'>
       <div className='w-full bg-[#0000003d] rounded-2xl sm:p-7 p-0 backdrop-blur-lg text-white'>
@@ -11,9 +13,9 @@ const MyOrders = () => {
             <p>Haz seguimiento de tus pedidos anteriores</p>
           </div>
           <div>
-            {/* {orders.map((order) => (
+            {orders?.map((order) => (
               <div
-                className='h-[200px] bg-white border border-[#e5edef] rounded-lg mb-7 overflow-hidden'
+                className=' bg-white border border-[#e5edef] rounded-lg mb-7 overflow-hidden'
                 key={order.id}
               >
                 <div className='w-full p-7 relative flex justify-between gap-2 flex-wrap lg:flex-nowrap'>
@@ -22,30 +24,32 @@ const MyOrders = () => {
                       <span className='min-w-[50px] pr-1 font-semibold inline-block text-[#332927]'>
                         Fecha:
                       </span>
-                      14/05/1996
+                      {order.createdAt}
                     </li>
                     <li className='w-full inline-block align-top leading-[1.7] text-ellipsis overflow-hidden whitespace-nowrap text-[#7d7d7d]'>
                       <span className='min-w-[50px] pr-1 font-semibold inline-block text-[#332927]'>
                         Total:
                       </span>
-                      10000
+                      {formatPrice(order.total)}
                     </li>
                   </ul>
 
                   <div className='flex justify-center items-center'>
-                    <span className='px-2 py-4 text-center'>pending</span>
+                    <span className='px-2 py-4 text-center'>
+                      {order.statusId}
+                    </span>
                   </div>
 
                   <div className='flex items-center justify-center flex-col'>
-                    <a>
+                    <Link href={`my-orders/${order.id}/order-items`}>
                       <button className='m-0 w-36 text-white h-auto rounded-lg border-none p-2 cursor-pointer bg-red-600 text-center hover:opacity-70 active:opacity-100'>
                         Ver resumen
                       </button>
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>
-            ))} */}
+            ))}
           </div>
         </div>
       </div>

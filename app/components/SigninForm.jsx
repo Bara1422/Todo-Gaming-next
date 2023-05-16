@@ -25,12 +25,8 @@ const SigninForm = () => {
   if (currentUser) {
     redirect('/')
   }
-  console.log(currentUser)
 
   const onSubmit = (data) => {
-    console.log(data.nombre)
-    console.log(data.password)
-    console.log(data.email)
     signin(data.nombre, data.email, data.password)
     reset()
   }

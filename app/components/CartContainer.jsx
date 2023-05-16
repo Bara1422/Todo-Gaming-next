@@ -19,7 +19,7 @@ const CartContainer = () => {
 
   return (
     <div
-      className='flex flex-col items-center cursor-pointer'
+      className='flex flex-col items-center cursor-pointer hover:text-amethyst-600'
       onClick={handleToggle}
     >
       <CartIcon />
