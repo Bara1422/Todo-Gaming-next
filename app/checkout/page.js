@@ -9,7 +9,7 @@ export const metadata = {
 }
 const Checkout = () => {
   return (
-    <LayoutPage img='checkoutBg.jpg'>
+    <LayoutPage img='checkoutBg.webp'>
       <Wrapper>
         <CheckoutForm />
       </Wrapper>

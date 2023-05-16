@@ -40,7 +40,7 @@ const Contact = () => {
     >
       <div className='absolute top-0 left-0 w-full h-full'>
         <Image
-          src='/ContactImage.jpg'
+          src='/ContactImage.webp'
           alt='Contact Background Image'
           fill
           style={{ objectFit: 'cover' }}

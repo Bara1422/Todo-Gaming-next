@@ -6,6 +6,8 @@ const GitHubIcon = () => {
       className='bg-white text-white rounded-full border-white border'
       height='32'
       aria-hidden='true'
+      role='img'
+      aria-label='GitHub Icon'
       viewBox='0 0 16 16'
       version='1.1'
       width='32'

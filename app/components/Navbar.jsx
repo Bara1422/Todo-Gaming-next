@@ -18,7 +18,7 @@ const Navbar = () => {
             style={{ zIndex: 2 }}
           >
             <Image
-              src='/Logo.png'
+              src='/Logo.webp'
               width={40}
               height={40}
               alt='Logo Icon'

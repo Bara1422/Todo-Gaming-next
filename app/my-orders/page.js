@@ -28,7 +28,7 @@ const Orders = () => {
   }, [])
 
   return (
-    <LayoutPage img='ordersBg.jpg'>
+    <LayoutPage img='ordersBg.webp'>
       <Wrapper>{isLoading ? <Spinner /> : <MyOrders orders={data} />}</Wrapper>
     </LayoutPage>
   )

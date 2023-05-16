@@ -11,7 +11,7 @@ export const metadata = {
 }
 const Login = () => {
   return (
-    <LayoutPage img='loginBg.jpeg'>
+    <LayoutPage img='loginBg.webp'>
       <Wrapper>
         <LoginForm />
       </Wrapper>

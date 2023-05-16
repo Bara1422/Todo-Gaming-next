@@ -34,7 +34,7 @@ const OrderResume = ({ params }) => {
   }
 
   return (
-    <LayoutPage img='ordersBg.jpg'>
+    <LayoutPage img='ordersBg.webp'>
       <Wrapper>
         {isLoading ? (
           <Spinner />
