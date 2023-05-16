@@ -67,7 +67,7 @@ const CheckoutForm = () => {
     setShipping(data)
     reset()
     await createOrder(
-      currentUser.userId,
+      currentUser?.userId,
       data.domicilio,
       data.localidad,
       items,
