@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import React, { useState } from 'react'
 import { toast, Toaster } from 'react-hot-toast'
 
@@ -35,9 +36,18 @@ const Contact = () => {
   return (
     <section
       id='contact'
-      className='sm:p-8 py-8 px-2 flex justify-center bg-contact-image bg-no-repeat bg-cover bg-center lg:bg-left'
+      className='sm:p-8 py-8 px-2 flex justify-center relative '
     >
-      <form className=' w-full md:w-4/6 lg:w-3/6  justify-center lg:max-w-lg'>
+      <div className='absolute top-0 left-0 w-full h-full'>
+        <Image
+          src='/ContactImage.jpg'
+          alt='Contact Background Image'
+          fill
+          style={{ objectFit: 'cover' }}
+          priority
+        />
+      </div>
+      <form className=' w-full md:w-4/6 lg:w-3/6  justify-center lg:max-w-lg z-50'>
         <fieldset className='flex flex-col bg-[#111]  justify-center border-2 border-white rounded-2xl p-8'>
           <legend className='sr-only'>Contáctanos</legend>
           <h2 className='text-center pb-4 text-2xl'>Contáctanos</h2>

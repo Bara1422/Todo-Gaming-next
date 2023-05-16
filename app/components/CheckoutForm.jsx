@@ -146,9 +146,9 @@ const CheckoutForm = () => {
             </Text>
             <Text fontSize='xl'>
               <span className='font-semibold'>Productos:</span>{' '}
-              <div className='flex flex-col gap-2'>
-                {items.map((product) => (
-                  <span className='text-base flex flex-col' key={product.id}>
+              <span className='flex flex-col gap-2'>
+                {items.map((product, index) => (
+                  <span className='text-base flex flex-col' key={index}>
                     {product.title}.
                     <span className='flex'>Cantidad: {product.quantity}.</span>
                     <span className='flex'>
@@ -156,7 +156,7 @@ const CheckoutForm = () => {
                     </span>
                   </span>
                 ))}
-              </div>
+              </span>
             </Text>
             <Text fontSize='2xl' pt={4}>
               <span className='font-bold'>Subtotal:</span>{' '}

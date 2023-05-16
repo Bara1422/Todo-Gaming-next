@@ -8,6 +8,7 @@ import { addCartItem } from '@/app/redux/features/cartSlice'
 import { useCategories, useGetProducts } from '@/app/hooks/useCategories'
 import { useAppDispatch } from '../redux/hooks'
 import { Toaster, toast } from 'react-hot-toast'
+import { Spinner } from '@chakra-ui/react'
 
 const ItemsGrid = () => {
   const dispatch = useAppDispatch()
@@ -38,6 +39,7 @@ const ItemsGrid = () => {
 
   return (
     <>
+      {catesLoading && <Spinner color='black' />}
       <div className='grid  md:grid-cols-2 lg:grid-cols-4 gap-3 mt-4 items-center justify-around mb-5 md:flex-wrap'>
         {!catesLoading && (
           <button

@@ -11,7 +11,7 @@ import { redirect } from 'next/navigation'
 
 const Orders = () => {
   const { data, isLoading } = useOrdersById()
-  const [local, setLocal] = useState(null)
+  const [, setLocal] = useState(null)
   const { currentUser } = useAuth()
 
   useEffect(() => {
@@ -26,7 +26,6 @@ const Orders = () => {
       setLocal(JSON.parse(storedData))
     }
   }, [])
-  console.log(local)
 
   return (
     <LayoutPage img='ordersBg.jpg'>
