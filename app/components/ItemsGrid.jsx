@@ -2,7 +2,7 @@
 /* eslint-disable indent */
 
 import { formatPrice /* products, arraySections  */ } from '@/data'
-import React, { useState } from 'react'
+import React, { useMemo, useState } from 'react'
 
 import { addCartItem } from '@/app/redux/features/cartSlice'
 import { useCategories, useGetProducts } from '@/app/hooks/useCategories'
@@ -29,17 +29,17 @@ const ItemsGrid = () => {
     })
   }
 
-  const filteredProducts = selectedSection
-    ? productss?.result?.filter(
-        (product) => product.categoryId === selectedSection
-      )
-    : productss?.result
+  const filteredProducts = useMemo(() => {
+    return selectedSection
+      ? productss?.result?.filter(
+          (product) => product.categoryId === selectedSection
+        )
+      : productss?.result
+  }, [selectedSection, productss])
 
   const handleSection = (sectionId) => {
     setSelectedSection(sectionId)
   }
-
-  console.log(filteredProducts)
 
   return (
     <>
@@ -76,7 +76,7 @@ const ItemsGrid = () => {
                 <Image
                   src={convertToWebp(product.imgUrl)}
                   alt={`Image of ${product.name}`}
-                  priority
+                  loading='lazy'
                   width={128}
                   height={128}
                   quality={5}
@@ -97,9 +97,9 @@ const ItemsGrid = () => {
                 Agregar al carrito
               </button>
             </div>
-            <Toaster position='bottom-center' />
           </div>
         ))}
+        <Toaster position='bottom-center' />
       </div>
     </>
   )
