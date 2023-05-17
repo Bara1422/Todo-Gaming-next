@@ -41,7 +41,7 @@ const OrderResumeById = ({ id, isLoading, orders }) => {
     <>
       {isLoading && <Spinner />}
       <div className='sm:w-4/6 md:px-5 flex items-center '>
-        <div className='w-full bg-[#fafafa] text-black rounded-3xl sm:p-5 py-2 '>
+        <div className='w-full bg-[#fafafa] text-black md:rounded-3xl rounded-xl sm:p-5 py-2 '>
           <div className='flex  justify-start items-center border-b  border-[#e5edef] px-5 sm:gap-2 '>
             <Link href='/my-orders'>
               <CustomButton w={16}>Volver</CustomButton>

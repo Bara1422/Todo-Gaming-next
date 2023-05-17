@@ -109,7 +109,7 @@ const BurgerMenu = () => {
           </>
         ) : (
           <Link href='/login' onClick={handleHiddenMenus} className=''>
-            <button className='px-3 py-2 text-sm border-solid hover:border-amethyst-600 rounded-md border '>
+            <button className='px-3 py-2 text-sm border-solid hover:border-amethyst-600 rounded-md border'>
               Ingresar
             </button>
           </Link>
