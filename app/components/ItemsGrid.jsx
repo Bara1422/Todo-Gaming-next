@@ -65,14 +65,14 @@ const ItemsGrid = () => {
           </button>
         ))}
       </div>
-      <div className='grid mx-auto grid-cols-1 md:grid-cols-2 lg:grid-cols-3 text-center justify-items-center gap-5 p-12'>
+      <div className='grid mx-auto grid-cols-1 md:grid-cols-2 lg:grid-cols-3 text-center justify-items-center gap-5 p-6 '>
         {filteredProducts?.map((product) => (
           <div
             className='flex justify-center items-center text-black'
             key={product.name}
           >
             <div className='max-h-[300px] h-[300px] relative mx-auto bg-no-repeat filter max-w-[18rem] flex flex-col mt-1 justify-end items-center bg-white shadow-md rounded-md hover:shadow-lg hover:mt-0 hover:cursor-default hover:filter-none contrast-75 hover:contrast-100 '>
-              <div className='absolute top-0 max-w-full h-32 w-32 max-h-36 '>
+              <div className='absolute top-3 max-w-full h-32 w-32 max-h-36 '>
                 <Image
                   src={convertToWebp(product.imgUrl)}
                   alt={`Image of ${product.name}`}
@@ -86,7 +86,7 @@ const ItemsGrid = () => {
                   }}
                 />
               </div>
-              <h5 className='p-1 text-xs sm:text-base'>{product.name}</h5>
+              <h5 className='p-1   sm:text-base'>{product.name}</h5>
               <p className='text-green-600 font-bold'>
                 {formatPrice(product.price)}
               </p>

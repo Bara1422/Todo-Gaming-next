@@ -5,7 +5,7 @@ import FooterMenu from './FooterMenu'
 
 const Footer = () => {
   return (
-    <footer className='border-t-2 flex justify-around p-4 bg-[#111] w-full'>
+    <footer className='border-t-2 flex justify-between p-4 bg-[#111] w-full'>
       <nav className='flex gap-3 pl-3  items-end'>
         <a
           href='https://www.linkedin.com/in/juan-baranovsky/'

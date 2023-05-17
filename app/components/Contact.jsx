@@ -44,11 +44,10 @@ const Contact = () => {
           alt='Contact Background Image'
           fill
           style={{ objectFit: 'cover' }}
-          priority
         />
       </div>
       <form className=' w-full md:w-4/6 lg:w-3/6  justify-center lg:max-w-lg z-10'>
-        <fieldset className='flex flex-col bg-[#111]  justify-center border-2 border-white rounded-2xl p-8'>
+        <fieldset className='flex flex-col bg-[#111] w-full  justify-center border-2 border-white rounded-2xl sm:p-6 p-3'>
           <legend className='sr-only'>Contáctanos</legend>
           <h2 className='text-center pb-4 text-2xl'>Contáctanos</h2>
           <input

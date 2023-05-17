@@ -3,7 +3,7 @@ import React from 'react'
 
 const LayoutPage = ({ children, img }) => {
   return (
-    <div className='px-5 py-5 flex items-start justify-center  bg-fixed m-auto min-h-screen h-full relative'>
+    <div className='px-2 py-5 flex items-start justify-center  bg-fixed m-auto min-h-screen h-full relative'>
       <div className='absolute top-0 left-0 w-full h-full'>
         <Image
           src={`/${img}`}
