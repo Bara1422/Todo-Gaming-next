@@ -6,4 +6,5 @@ export function safeGetLocalStorage(key) {
 }
 
 const stringData = safeGetLocalStorage('authData')
+
 export const authData = JSON.parse(stringData)

@@ -8,6 +8,7 @@ import { useOrdersById } from '../hooks/useCategories'
 import { Spinner } from '@chakra-ui/react'
 import { useAuth } from '../context/AuthContext'
 import { redirect } from 'next/navigation'
+import { authData } from '../utils/safeGetLocalStorage'
 
 const Orders = () => {
   const { data, isLoading } = useOrdersById()
@@ -15,10 +16,10 @@ const Orders = () => {
   const { currentUser } = useAuth()
 
   useEffect(() => {
-    if (!currentUser) {
+    if (!currentUser && !authData) {
       redirect('/login')
     }
-  })
+  }, [currentUser])
 
   useEffect(() => {
     const storedData = localStorage.getItem('myData')
