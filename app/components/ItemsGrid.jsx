@@ -77,9 +77,12 @@ const ItemsGrid = () => {
                   src={convertToWebp(product.imgUrl)}
                   alt={`Image of ${product.name}`}
                   priority
-                  width={150}
-                  height={150}
-                  style={{ objectFit: 'cover', margin: '0 auto' }}
+                  width={640}
+                  height={640}
+                  style={{
+                    objectFit: 'cover',
+                    margin: '0 auto'
+                  }}
                 />
               </div>
               <h5 className='p-1 text-xs sm:text-base'>{product.name}</h5>
