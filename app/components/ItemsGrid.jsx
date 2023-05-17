@@ -69,14 +69,13 @@ const ItemsGrid = () => {
             key={product.name}
           >
             <div className='max-h-[300px] h-[300px] relative mx-auto bg-no-repeat filter max-w-[18rem] flex flex-col mt-1 justify-end items-center bg-white shadow-md rounded-md hover:shadow-lg hover:mt-0 hover:cursor-default hover:filter-none contrast-75 hover:contrast-100 '>
-              <div className='absolute top-0 left-0 w-full h-full'>
+              <div className='absolute top-0 max-w-full h-36 w-36 max-h-36 '>
                 <Image
                   src={product.imgUrl}
                   alt={`Image of ${product.name}`}
-                  width={140}
-                  height={140}
+                  fill
                   priority
-                  style={{ objectFit: 'contain', margin: '0 auto' }}
+                  style={{ objectFit: 'cover', margin: '0 auto' }}
                 />
               </div>
               <h5 className='p-1 text-xs sm:text-base'>{product.name}</h5>
