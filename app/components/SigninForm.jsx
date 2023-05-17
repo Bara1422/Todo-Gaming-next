@@ -9,8 +9,9 @@ import Link from 'next/link'
 import { useAuth } from '@/app/context/AuthContext'
 import { Spinner } from '@chakra-ui/react'
 import { Toaster, toast } from 'react-hot-toast'
-import { redirect } from 'next/navigation'
+
 import { VALIDATE_EMAIL } from '../utils/utils'
+import { useRouter } from 'next/router'
 
 const SigninForm = () => {
   const {
@@ -19,11 +20,12 @@ const SigninForm = () => {
     reset,
     formState: { errors }
   } = useForm()
+  const router = useRouter()
 
   const { signin, loading, error, currentUser } = useAuth()
 
   if (currentUser) {
-    redirect('/')
+    router.push('/')
   }
 
   const onSubmit = (data) => {

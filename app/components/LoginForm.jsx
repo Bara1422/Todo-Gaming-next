@@ -8,7 +8,7 @@ import Link from 'next/link'
 import { useAuth } from '@/app/context/AuthContext'
 import { Toaster, toast } from 'react-hot-toast'
 import { Spinner } from '@chakra-ui/react'
-import { redirect } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { VALIDATE_EMAIL } from '../utils/utils'
 
 const LoginForm = () => {
@@ -20,6 +20,7 @@ const LoginForm = () => {
   } = useForm()
 
   const { login, loading, currentUser, error } = useAuth()
+  const router = useRouter()
 
   const onSubmit = (data) => {
     login(data.email, data.password)
@@ -28,9 +29,9 @@ const LoginForm = () => {
 
   useEffect(() => {
     if (currentUser) {
-      redirect('/')
+      router.push('/')
     }
-  }, [currentUser])
+  }, [currentUser, router])
 
   useEffect(() => {
     if (error) {

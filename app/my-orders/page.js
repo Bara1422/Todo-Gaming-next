@@ -7,19 +7,20 @@ import LayoutPage from '../components/LayoutPage'
 import { useOrdersById } from '../hooks/useCategories'
 import { Spinner } from '@chakra-ui/react'
 import { useAuth } from '../context/AuthContext'
-import { redirect } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import { authData } from '../utils/safeGetLocalStorage'
 
 const Orders = () => {
   const { data, isLoading } = useOrdersById()
   const [, setLocal] = useState(null)
   const { currentUser } = useAuth()
+  const router = useRouter()
 
   useEffect(() => {
     if (!currentUser && !authData) {
-      redirect('/login')
+      router.push('/login')
     }
-  }, [currentUser])
+  }, [currentUser, router])
 
   useEffect(() => {
     const storedData = localStorage.getItem('myData')

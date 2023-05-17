@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useSelector } from 'react-redux'
 import Link from 'next/link'
-import { redirect } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import {
   Button,
   Modal,
@@ -36,6 +36,7 @@ const CheckoutForm = () => {
   const { createOrder, initPoint, isLoading } = useCreateOrder()
   const cartItems = useSelector((state) => state.cart.cartItems)
   const [shipping, setShipping] = useState(null)
+  const router = useRouter()
 
   const subTotal = cartItems.reduce((acc, item) => {
     return acc + item.price * item.quantity
@@ -52,9 +53,9 @@ const CheckoutForm = () => {
 
   useEffect(() => {
     if (!currentUser) {
-      redirect('/login')
+      router.push('/login')
     }
-  }, [currentUser])
+  }, [currentUser, router])
 
   const {
     register,
@@ -78,7 +79,7 @@ const CheckoutForm = () => {
 
   const handleCart = () => {
     dispatch(resetCart())
-    redirect('/my-orders')
+    router.push('/my-orders')
   }
 
   const onPurcharse = () => {

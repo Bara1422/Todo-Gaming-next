@@ -1,22 +1,25 @@
 'use client'
 import Link from 'next/link'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useAuth } from '../context/AuthContext'
-import { redirect } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 import Shadow from './Shadow'
 
 const UserMenu = () => {
   const { logout, currentUser, setHiddenMenu, hiddenMenu } = useAuth()
+  const router = useRouter()
 
   const handleLogout = () => {
     logout()
     setHiddenMenu(false)
-    redirect('/')
+    router.push('/')
   }
 
-  if (!currentUser) {
-    redirect('/')
-  }
+  useEffect(() => {
+    if (!currentUser) {
+      router.push('/')
+    }
+  }, [currentUser, router])
 
   const handleToggle = () => {
     setHiddenMenu(!hiddenMenu)
