@@ -10,6 +10,7 @@ import { useAppDispatch } from '../redux/hooks'
 import { Toaster, toast } from 'react-hot-toast'
 import { Spinner } from '@chakra-ui/react'
 import Image from 'next/image'
+import { convertToWebp } from '../utils/utils'
 
 const ItemsGrid = () => {
   const dispatch = useAppDispatch()
@@ -37,6 +38,8 @@ const ItemsGrid = () => {
   const handleSection = (sectionId) => {
     setSelectedSection(sectionId)
   }
+
+  console.log(filteredProducts)
 
   return (
     <>
@@ -71,10 +74,11 @@ const ItemsGrid = () => {
             <div className='max-h-[300px] h-[300px] relative mx-auto bg-no-repeat filter max-w-[18rem] flex flex-col mt-1 justify-end items-center bg-white shadow-md rounded-md hover:shadow-lg hover:mt-0 hover:cursor-default hover:filter-none contrast-75 hover:contrast-100 '>
               <div className='absolute top-0 max-w-full h-36 w-36 max-h-36 '>
                 <Image
-                  src={product.imgUrl}
+                  src={convertToWebp(product.imgUrl)}
                   alt={`Image of ${product.name}`}
-                  fill
                   priority
+                  width={150}
+                  height={150}
                   style={{ objectFit: 'cover', margin: '0 auto' }}
                 />
               </div>

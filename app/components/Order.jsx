@@ -7,6 +7,7 @@ import QuantityManage from './QuantityManage'
 import { toggleCartHidden, resetCart } from '@/app/redux/features/cartSlice'
 import Link from 'next/link'
 import Image from 'next/image'
+import { convertToWebp } from '../utils/utils'
 
 const Order = () => {
   const dispatch = useDispatch()
@@ -58,7 +59,7 @@ const Order = () => {
               <div className='px-2 py-1 grid grid-cols-[50px_100px_100px] justify-between'>
                 <div className='w-11 h-11  flex items-center justify-center rounded-lg'>
                   <Image
-                    src={item.imgUrl}
+                    src={convertToWebp(item.imgUrl)}
                     alt={`Image of ${item.name}`}
                     width={44}
                     height={44}

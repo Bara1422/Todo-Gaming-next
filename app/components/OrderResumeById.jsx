@@ -8,6 +8,7 @@ import Link from 'next/link'
 import CustomButton from './CustomButton'
 import { formatPrice } from '@/data'
 import Image from 'next/image'
+import { convertToWebp } from '../utils/utils'
 
 const OrderResumeById = ({ id, isLoading, orders }) => {
   const { data: ordersById } = useOrdersWithProducts()
@@ -62,7 +63,7 @@ const OrderResumeById = ({ id, isLoading, orders }) => {
                     width={70}
                     height={70}
                     className=' place-self-start'
-                    src={item.imgUrl}
+                    src={convertToWebp(item.imgUrl)}
                     alt={`Item Image of ${item.title}`}
                   />
                   <div className='flex w-full sm:pl-2'>
