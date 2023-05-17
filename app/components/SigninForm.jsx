@@ -11,7 +11,7 @@ import { Spinner } from '@chakra-ui/react'
 import { Toaster, toast } from 'react-hot-toast'
 
 import { VALIDATE_EMAIL } from '../utils/utils'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 
 const SigninForm = () => {
   const {
