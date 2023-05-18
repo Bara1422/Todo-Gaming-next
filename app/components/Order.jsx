@@ -45,7 +45,7 @@ const Order = () => {
             <p className='text-black'>Tu pedido:</p>
 
             <button
-              className='text-white h-auto rounded-lg p-2 w-[100px] text-xs  bg-red-600 text-center hover:opacity-70 active:opacity-100 disabled:opacity-40'
+              className='text-white h-auto rounded-lg p-2 w-[100px] text-xs  bg-black text-center hover:opacity-70 active:opacity-100 disabled:opacity-40'
               disabled={cartItems.length === 0}
               onClick={handleClearCart}
             >
@@ -62,7 +62,7 @@ const Order = () => {
           <Link href='/checkout' aria-label='Ir a pagar'>
             {cartItems.length !== 0 && (
               <button
-                className='m-2 h-auto rounded-lg p-2 w-[200px] text-center hover:opacity-70 active:opacity-100 disabled:opacity-40 bg-red-600'
+                className='m-2 h-auto rounded-lg p-2 w-[200px] text-center hover:opacity-70 active:opacity-100 disabled:opacity-40 bg-black'
                 onClick={handleToggleCart}
               >
                 Ir a pagar {formatPrice(total)}

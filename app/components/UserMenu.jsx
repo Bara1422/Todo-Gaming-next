@@ -41,14 +41,14 @@ const UserMenu = () => {
           <Link
             href='my-orders'
             onClick={handleToggle}
-            className='transition-all px-4 py-5 text-[#7d7d7d] text-sm cursor-pointer hover:bg-[rgba(255,68,31,0.04)] hover:text-[#ff441f]'
+            className='transition-all px-4 py-5 text-[#7d7d7d] text-sm cursor-pointer hover:bg-amethyst-100/70 hover:text-amethyst-600'
           >
             <span>Mis ordenes</span>
           </Link>
           <button
             onClick={handleLogout}
             aria-label='Cerrar Sesión'
-            className='transition-all text-start px-4 py-5 text-[#7d7d7d] text-sm cursor-pointer hover:bg-[rgba(255,68,31,0.04)] hover:text-[#ff441f]'
+            className='transition-all text-start px-4 py-5 text-[#7d7d7d] text-sm cursor-pointer hover:bg-amethyst-100/70 hover:text-amethyst-600'
           >
             Cerrar Sesión
           </button>

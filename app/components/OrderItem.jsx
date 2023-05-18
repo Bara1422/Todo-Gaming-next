@@ -30,7 +30,7 @@ const OrderItem = ({ order }) => {
 
         <div className='flex items-center justify-center flex-col'>
           <Link href={`my-orders/${order.id}/order-items`}>
-            <button className='m-0 w-24 sm:w-36 text-white h-auto rounded-lg border-none p-2 cursor-pointer bg-red-600 text-center hover:opacity-70 active:opacity-100'>
+            <button className='m-0 w-24 sm:w-36 text-white h-auto rounded-lg border-none p-2 cursor-pointer bg-black hover:text-amethyst-400 text-center'>
               Ver resumen
             </button>
           </Link>

@@ -14,7 +14,7 @@ const Navbar = () => {
         >
           <Link
             href='/'
-            className='hover:text-amethyst-600 flex items-end gap-2 ml-3'
+            className='hover:text-amethyst-600 transition-color duration-200 flex items-end gap-2 ml-3'
             style={{ zIndex: 2 }}
           >
             <Image
@@ -22,6 +22,7 @@ const Navbar = () => {
               width={40}
               height={40}
               alt='Logo Icon'
+              priority
               style={{ height: 'auto', width: 'auto' }}
             />
             <span className='text-3xl hidden md:block font-bold'>
