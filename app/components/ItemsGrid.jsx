@@ -1,7 +1,7 @@
 'use client'
 /* eslint-disable indent */
 
-import { formatPrice /* products, arraySections  */ } from '@/data'
+import { formatPrice } from '@/data'
 import React, { useMemo, useState } from 'react'
 
 import { addCartItem } from '@/app/redux/features/cartSlice'
@@ -11,6 +11,7 @@ import { Toaster, toast } from 'react-hot-toast'
 import { Spinner } from '@chakra-ui/react'
 import Image from 'next/image'
 import { convertToWebp } from '../utils/utils'
+import SectionButton from './SectionButton'
 
 const ItemsGrid = () => {
   const dispatch = useAppDispatch()
@@ -55,15 +56,12 @@ const ItemsGrid = () => {
           </button>
         )}
         {cates?.result?.map((section) => (
-          <button
-            onClick={() => handleSection(section.id)}
-            className={`flex w-52 text-gray-800 items-center justify-center font-bold shadow-md rounded-2xl p-4 cursor-pointer ${
-              selectedSection === section.id ? 'bg-gray-300' : 'bg-gray-200'
-            }`}
+          <SectionButton
             key={section.id}
-          >
-            <p>{section.category}</p>
-          </button>
+            section={section}
+            handleSection={handleSection}
+            selectedSection={selectedSection}
+          />
         ))}
       </div>
       <div className='grid mx-auto grid-cols-1 md:grid-cols-2 lg:grid-cols-3 text-center justify-items-center gap-5 p-6 '>
