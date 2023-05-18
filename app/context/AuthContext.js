@@ -118,6 +118,7 @@ function useProvideAuth() {
   const authCheckState = useCallback(() => {
     const stringData = localStorage.getItem('authData')
     const authData = JSON.parse(String(stringData))
+    setLoading(true)
     if (!authData?.token) {
       logout()
     } else {
@@ -132,6 +133,7 @@ function useProvideAuth() {
         logout()
       }
     }
+    setLoading(false)
   }, [logout, checkAuthTimeout])
 
   return useMemo(() => {

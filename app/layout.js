@@ -20,7 +20,9 @@ export default function RootLayout({ children }) {
     <html lang='en'>
       <Provider>
         <Providers>
-          <body className={`${inter.className} bg-[#111] text-white`}>
+          <body
+            className={`${inter.className} bg-[#111] text-white min-h-screen `}
+          >
             <ChakraProviders>
               <Navbar />
               <Order />

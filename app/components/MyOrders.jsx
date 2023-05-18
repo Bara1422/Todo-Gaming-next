@@ -5,7 +5,7 @@ import React from 'react'
 
 const MyOrders = ({ orders }) => {
   return (
-    <section className='sm:w-[70%]  min-h-screen '>
+    <section className='sm:w-[70%] pb-[130px] pt-16'>
       <div className='w-full bg-[#0000003d] rounded-2xl sm:p-7 p-0 backdrop-blur-lg text-white'>
         <div className='max-w-screen-lg p-2'>
           <div className='pb-5 border-b border-[#e5edef] mb-5'>

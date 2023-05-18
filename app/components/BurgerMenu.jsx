@@ -22,7 +22,7 @@ const BurgerMenu = () => {
 
   useEffect(() => {
     authCheckState()
-  }, [authCheckState])
+  }, [authCheckState, isAuthenticated])
 
   const handleHiddenMenus = useCallback(() => {
     setIsOpen(false)

@@ -10,7 +10,7 @@ export const metadata = {
 
 const Products = () => {
   return (
-    <div className='h-full min-h-screen m-0 sm:pt-36 pt-28 flex flex-col items-center select-none bg-slate-100'>
+    <div className='min-h-[inherit] m-0 sm:pt-36 pt-28 flex flex-col items-center select-none bg-slate-100 pb-[130px]'>
       <h2 className='text-black text-4xl text-center font-bold'>
         NUESTROS PRODUCTOS
       </h2>

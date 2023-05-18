@@ -2,13 +2,12 @@
 
 import { useAxios } from '@/app/context/AxiosContext'
 import { useQuery } from '@tanstack/react-query'
-import { authData } from '../utils/safeGetLocalStorage'
+import { useAuth } from '../context/AuthContext'
 
 export const useCategories = () => {
   const axios = useAxios()
   return useQuery(['categories'], async () => {
     const { data } = await axios.get('category')
-
     return data.data
   })
 }
@@ -17,20 +16,19 @@ export const useGetProducts = () => {
   const axios = useAxios()
   return useQuery(['products'], async () => {
     const { data } = await axios.get('products')
-
     return data.data
   })
 }
 
-export const useOrdersById = () => {
+export const useOrdersById = (userId) => {
   const axios = useAxios()
-  return useQuery(['orders', authData?.userId], async () => {
+  const { currentUser } = useAuth()
+  return useQuery(['orders', userId], async () => {
     try {
       const { data } = await axios.get('orders')
       const orders = await data.data.result
-
       const filteredOrders = await orders.filter(
-        (order) => order.userId === authData.userId
+        (order) => order.userId === (currentUser && currentUser.userId)
       )
       const ordersEnd = filteredOrders.map((order) => {
         const newCreatedAt = order.createdAt.substring(0, 10)

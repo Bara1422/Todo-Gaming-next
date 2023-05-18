@@ -11,9 +11,9 @@ import { useRouter } from 'next/navigation'
 import { authData } from '../utils/safeGetLocalStorage'
 
 const Orders = () => {
-  const { data, isLoading } = useOrdersById()
-  const [, setLocal] = useState(null)
   const { currentUser } = useAuth()
+  const { data, isLoading, refetch } = useOrdersById(currentUser?.userId)
+  const [local, setLocal] = useState(null)
   const router = useRouter()
 
   useEffect(() => {
@@ -23,11 +23,17 @@ const Orders = () => {
   }, [currentUser, router])
 
   useEffect(() => {
+    if (!isLoading && currentUser?.userId !== (data && data[0]?.userId)) {
+      refetch()
+    }
+  }, [currentUser, refetch, data, isLoading])
+
+  useEffect(() => {
     const storedData = localStorage.getItem('myData')
     if (storedData) {
       setLocal(JSON.parse(storedData))
     }
-  }, [])
+  }, [local])
 
   return (
     <LayoutPage img='ordersBg.webp'>
