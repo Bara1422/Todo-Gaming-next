@@ -47,7 +47,7 @@ const OrderResume = ({ params }) => {
     <LayoutPage img='ordersBg.webp'>
       <Wrapper>
         {isLoading || !isFilteredOrdersResolved ? (
-          <Spinner />
+          <Spinner className='mt-36' size='lg' />
         ) : (
           <OrderResumeById id={id[0]} orders={orders} isLoading={isLoading} />
         )}

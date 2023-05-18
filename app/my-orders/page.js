@@ -37,7 +37,13 @@ const Orders = () => {
 
   return (
     <LayoutPage img='ordersBg.webp'>
-      <Wrapper>{isLoading ? <Spinner /> : <MyOrders orders={data} />}</Wrapper>
+      <Wrapper>
+        {isLoading ? (
+          <Spinner className='mt-36' size='lg' />
+        ) : (
+          <MyOrders orders={data} />
+        )}
+      </Wrapper>
     </LayoutPage>
   )
 }
