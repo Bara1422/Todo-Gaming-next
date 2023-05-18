@@ -28,8 +28,8 @@ const SigninForm = () => {
     router.push('/')
   }
 
-  const onSubmit = (data) => {
-    signin(data.nombre, data.email, data.password)
+  const onSubmit = async (data) => {
+    await signin(data.nombre, data.email, data.password)
     reset()
   }
 
@@ -123,7 +123,10 @@ const SigninForm = () => {
                 <p>Ya tienes cuenta?</p>
               </span>
               <Link href='/login'>
-                <button className='text-red-600 ml-1 cursor-pointer hover:underline'>
+                <button
+                  className='text-red-600 ml-1 cursor-pointer hover:underline'
+                  aria-label='Ingresar'
+                >
                   <p>Ingresar</p>
                 </button>
               </Link>

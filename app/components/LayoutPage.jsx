@@ -10,7 +10,6 @@ const LayoutPage = ({ children, img }) => {
           fill
           alt='Contact Background Image'
           style={{ objectFit: 'cover' }}
-          priority
         />
       </div>
       {children}

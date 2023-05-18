@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useCallback } from 'react'
+import React, { useCallback, useMemo } from 'react'
 import { CartIcon } from '../Icons/CartIcon'
 import { useDispatch, useSelector } from 'react-redux'
 import { toggleCartHidden } from '@/app/redux/features/cartSlice'
@@ -8,11 +8,15 @@ import { toggleCartHidden } from '@/app/redux/features/cartSlice'
 const CartContainer = () => {
   const dispatch = useDispatch()
 
-  const quantity = useSelector((state) =>
-    state.cart.cartItems.reduce((acc, cartItem) => {
+  const cartItems = useSelector((state) => state.cart.cartItems)
+
+  const calculateQuantity = (items) => {
+    return items.reduce((acc, cartItem) => {
       return acc + cartItem.quantity
     }, 0)
-  )
+  }
+
+  const quantity = useMemo(() => calculateQuantity(cartItems), [cartItems])
 
   const handleToggleCartHidden = useCallback(() => {
     dispatch(toggleCartHidden())

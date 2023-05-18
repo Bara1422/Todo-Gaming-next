@@ -9,7 +9,7 @@ import { useAuth } from '@/app/context/AuthContext'
 import { Toaster, toast } from 'react-hot-toast'
 import { Spinner } from '@chakra-ui/react'
 import { useRouter } from 'next/navigation'
-import { VALIDATE_EMAIL } from '../utils/utils'
+import { emailValidation, passwordValidation } from '../utils/utils'
 
 const LoginForm = () => {
   const {
@@ -58,13 +58,7 @@ const LoginForm = () => {
             <input
               className='w-full border-none caret-[#ff441f] p-4 rounded-t-2xl bg-transparent h-6 block text-[#7d7d7d] focus:outline-none focus:border-black'
               type='email'
-              {...register('email', {
-                required: 'Este campo es requerido',
-                pattern: {
-                  value: VALIDATE_EMAIL,
-                  message: 'Email inválido'
-                }
-              })}
+              {...register('email', emailValidation)}
             />
           </div>
           {errors.email && (
@@ -80,13 +74,7 @@ const LoginForm = () => {
             <input
               className='w-full border-none caret-[#ff441f] p-4 rounded-t-2xl bg-transparent h-6 block text-[#7d7d7d] focus:outline-none focus:border-black'
               type='password'
-              {...register('password', {
-                required: 'Este campo es requerido',
-                minLength: {
-                  value: 5,
-                  message: 'Mínimo 5 caracteres'
-                }
-              })}
+              {...register('password', passwordValidation)}
             />
           </div>
           {errors.password && (
@@ -105,7 +93,10 @@ const LoginForm = () => {
               <p>¿Todavia no tienes cuenta?</p>
             </span>
             <Link href='/signin'>
-              <button className='text-red-600 ml-1 cursor-pointer hover:underline'>
+              <button
+                className='text-red-600 ml-1 cursor-pointer hover:underline'
+                aria-label='Registrarte'
+              >
                 <p>Registrarte</p>
               </button>
             </Link>

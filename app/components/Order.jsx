@@ -1,21 +1,23 @@
 'use client'
 
 import { formatPrice } from '@/data'
-import React from 'react'
+import React, { useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import QuantityManage from './QuantityManage'
 import { toggleCartHidden, resetCart } from '@/app/redux/features/cartSlice'
 import Link from 'next/link'
-import Image from 'next/image'
-import { convertToWebp } from '../utils/utils'
+import OrderCartItem from './OrderCartItem'
 
 const Order = () => {
   const dispatch = useDispatch()
   const hidden = useSelector((state) => state.cart.hidden)
   const cartItems = useSelector((state) => state.cart.cartItems)
-  const total = cartItems.reduce((acc, item) => {
-    return acc + item.price * item.quantity
-  }, 0)
+  const total = useMemo(
+    () =>
+      cartItems.reduce((acc, item) => {
+        return acc + item.price * item.quantity
+      }, 0),
+    [cartItems]
+  )
 
   const handleToggleCart = () => {
     dispatch(toggleCartHidden())
@@ -52,30 +54,7 @@ const Order = () => {
           </div>
 
           {cartItems.map((item) => (
-            <div
-              className='px-2 py-1 w-full border-b border-gray-500 flex justify-between items-center text-black'
-              key={item.id}
-            >
-              <div className='px-2 py-1 grid grid-cols-[50px_100px_100px] justify-between'>
-                <div className='w-11 h-11  flex items-center justify-center rounded-lg'>
-                  <Image
-                    src={convertToWebp(item.imgUrl)}
-                    alt={`Image of ${item.name}`}
-                    width={44}
-                    height={44}
-                    style={{ objectFit: 'cover' }}
-                  />
-                </div>
-
-                <div className=''>
-                  <div className='text-sm'>{item.name}</div>
-                  <p className='text-green-600 font-semibold'>
-                    {formatPrice(item.price * item.quantity)}
-                  </p>
-                </div>
-                <QuantityManage item={item} />
-              </div>
-            </div>
+            <OrderCartItem item={item} key={item.id} />
           ))}
         </div>
 

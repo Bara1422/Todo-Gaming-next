@@ -43,6 +43,7 @@ const ItemsGrid = () => {
 
   return (
     <>
+      <Toaster position='bottom-center' />
       {catesLoading && <Spinner color='black' />}
       <div className='grid  md:grid-cols-2 lg:grid-cols-4 gap-3 mt-4 items-center justify-around mb-5 md:flex-wrap'>
         {!catesLoading && (
@@ -99,7 +100,6 @@ const ItemsGrid = () => {
             </div>
           </div>
         ))}
-        <Toaster position='bottom-center' />
       </div>
     </>
   )

@@ -1,6 +1,6 @@
 'use client'
 import Link from 'next/link'
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { useAuth } from '../context/AuthContext'
 import { useRouter } from 'next/navigation'
 import Shadow from './Shadow'
@@ -9,11 +9,11 @@ const UserMenu = () => {
   const { logout, currentUser, setHiddenMenu, hiddenMenu } = useAuth()
   const router = useRouter()
 
-  const handleLogout = () => {
+  const handleLogout = useCallback(() => {
     logout()
     setHiddenMenu(false)
     router.push('/')
-  }
+  }, [logout, setHiddenMenu, router])
 
   useEffect(() => {
     if (!currentUser) {
@@ -21,9 +21,9 @@ const UserMenu = () => {
     }
   }, [currentUser, router])
 
-  const handleToggle = () => {
-    setHiddenMenu(!hiddenMenu)
-  }
+  const handleToggle = useCallback(() => {
+    setHiddenMenu((prevState) => !prevState)
+  }, [setHiddenMenu])
 
   return (
     <>
@@ -47,6 +47,7 @@ const UserMenu = () => {
           </Link>
           <button
             onClick={handleLogout}
+            aria-label='Cerrar Sesión'
             className='transition-all text-start px-4 py-5 text-[#7d7d7d] text-sm cursor-pointer hover:bg-[rgba(255,68,31,0.04)] hover:text-[#ff441f]'
           >
             Cerrar Sesión

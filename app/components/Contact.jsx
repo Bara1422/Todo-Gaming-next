@@ -10,20 +10,44 @@ const Contact = () => {
     email: '',
     message: ''
   })
+  const [errors, setErrors] = useState({})
+
+  const validateForm = () => {
+    const formErrors = {}
+
+    if (!data.name.trim()) {
+      formErrors.name = 'Por favor ingresa tu nombre'
+    }
+
+    if (!data.email.trim()) {
+      formErrors.email = 'Por favor ingresa tu email'
+    } else if (!/\S+@\S+\.\S+/.test(data.email)) {
+      formErrors.email = 'Por favor ingresa un email válido'
+    }
+    if (!data.message.trim()) {
+      formErrors.name = 'Por favor ingresa tu mensaje'
+    }
+
+    setErrors(formErrors)
+    return Object.keys(formErrors).length === 0
+  }
+
   const sendForm = (e) => {
     e.preventDefault()
-    toast.success('Mensaje enviado', {
-      style: {
-        borderRadius: '10px',
-        background: '#333',
-        color: '#fff'
-      }
-    })
-    setData({
-      name: '',
-      email: '',
-      message: ''
-    })
+    if (validateForm()) {
+      toast.success('Mensaje enviado', {
+        style: {
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff'
+        }
+      })
+      setData({
+        name: '',
+        email: '',
+        message: ''
+      })
+    }
   }
 
   const handleChange = (e) => {
@@ -55,31 +79,53 @@ const Contact = () => {
             name='name'
             placeholder='Nombre'
             aria-label='Nombre'
+            aria-describedby='nameError'
             className='mb-2 p-2 rounded-md bg-[#111] border-2 border-white'
             value={data.name}
             onChange={handleChange}
           />
+          {errors.name && (
+            <p id='nameError' className='text-red-500 text-sm'>
+              {errors.name}
+            </p>
+          )}
+
           <input
             type='email'
             name='email'
             placeholder='Email'
             aria-label='Email'
+            aria-describedby='emailError'
             className='mb-2 p-2 rounded-md bg-[#111] border-2 border-white'
             value={data.email}
             onChange={handleChange}
           />
+          {errors.email && (
+            <p id='emailError' className='text-red-500 text-sm'>
+              {errors.email}
+            </p>
+          )}
+
           <textarea
             cols='20'
             rows='5'
             name='message'
             placeholder='Escribe tu mensaje...'
+            aria-describedby='messageError'
             className='mb-2 rounded-md p-2 bg-[#111] border-2 border-white'
             value={data.message}
             onChange={handleChange}
           />
+          {errors.message && (
+            <p id='messageError' className='text-red-500 text-sm'>
+              {errors.message}
+            </p>
+          )}
+
           <button
             className='border-2 border-white w-1/3 mx-auto rounded-md p-1 text-lg hover:text-amethyst-600'
             onClick={sendForm}
+            aria-label='Enviar mensaje'
           >
             Enviar
           </button>

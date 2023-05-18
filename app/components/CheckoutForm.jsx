@@ -27,6 +27,8 @@ import { formatPrice } from '@/data'
 import { useAppDispatch } from '../redux/hooks'
 import { resetCart } from '../redux/features/cartSlice'
 import CustomButton from './CustomButton'
+import ItemsInThePurchase from './ItemsInThePurchase'
+import CheckoutFormIndex from './CheckoutFormInput'
 
 const COSTOENVIO = 250
 const CheckoutForm = () => {
@@ -91,35 +93,19 @@ const CheckoutForm = () => {
   return (
     <FormStyled onSubmit={handleSubmit(onSubmit)}>
       <div className=' p-7 rounded-md bg-white shadow-lg w-full gap-3 flex flex-col text-black'>
-        <label htmlFor='domicilio' className='font-bold px-1'>
-          Domicilio
-        </label>
-        <div className='flex items-center justify-start flex-col relative bg-gray-100 rounded-2xl text-[#7d7d7d] px-1 shadow-lg focus:bg-white focus:outline-0'>
-          <input
-            className='w-full border-none caret-[#ff441f] p-4 rounded-t-2xl bg-transparent h-6 block text-[#7d7d7d] focus:outline-none focus:border-black'
-            {...register('domicilio', { required: true })}
-          />
-        </div>
-        {errors.domicilio && (
-          <span className='text-red-600 font-semibold pl-1'>
-            Este campo es requerido
-          </span>
-        )}
+        <CheckoutFormIndex
+          label='Domicilio'
+          name='domicilio'
+          register={register}
+          errors={errors}
+        />
 
-        <label htmlFor='localidad' className='font-bold px-1'>
-          Localidad
-        </label>
-        <div className='flex items-center justify-start flex-col relative bg-gray-100 rounded-2xl text-[#7d7d7d] px-1 shadow-lg focus:bg-white focus:outline-0'>
-          <input
-            className='w-full border-none caret-[#ff441f] p-4 rounded-t-2xl bg-transparent h-6 block text-[#7d7d7d] focus:outline-none focus:border-black'
-            {...register('localidad', { required: true })}
-          />
-        </div>
-        {errors.localidad && (
-          <span className='text-red-600 font-semibold pl-1'>
-            Este campo es requerido
-          </span>
-        )}
+        <CheckoutFormIndex
+          label='Localidad'
+          name='localidad'
+          register={register}
+          errors={errors}
+        />
 
         <CardSummary subTotal={subTotal} envio={COSTOENVIO} />
 
@@ -148,13 +134,7 @@ const CheckoutForm = () => {
               <span className='font-semibold'>Productos:</span>{' '}
               <span className='flex flex-col gap-2'>
                 {items.map((product, index) => (
-                  <span className='text-base flex flex-col' key={index}>
-                    {product.title}.
-                    <span className='flex'>Cantidad: {product.quantity}.</span>
-                    <span className='flex'>
-                      Precio unitario: {formatPrice(product.unitPrice)}.
-                    </span>
-                  </span>
+                  <ItemsInThePurchase product={product} key={index} />
                 ))}
               </span>
             </Text>

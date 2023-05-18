@@ -1,7 +1,7 @@
 'use client'
 
 import { Spinner } from '@chakra-ui/react'
-import React, { useEffect, useState } from 'react'
+import React, { useMemo } from 'react'
 import { useOrdersWithProducts } from '../hooks/useOrdersWithProducts'
 import { useGetProducts } from '../hooks/useCategories'
 import Link from 'next/link'
@@ -13,27 +13,28 @@ import { convertToWebp } from '../utils/utils'
 const OrderResumeById = ({ id, isLoading, orders }) => {
   const { data: ordersById } = useOrdersWithProducts()
   const { data: products } = useGetProducts()
-  const [imageOrders, setImageOrders] = useState(null)
 
-  useEffect(() => {
-    const filterProductsById = async () => {
-      if (products && orders) {
-        await orders.map((order) => {
-          const producto = products.result?.find(
-            (product) => product.id === order.productsId
-          )
+  const filterProductsById = (orders, products) => {
+    if (products && orders) {
+      return orders.map((order) => {
+        const producto = products.result?.find(
+          (product) => product.id === order.productsId
+        )
 
-          if (producto) {
-            order.title = producto.name
-            order.imgUrl = producto.imgUrl
-          }
-          setImageOrders(orders)
-          return orders
-        })
-      }
+        if (producto) {
+          order.title = producto.name
+          order.imgUrl = producto.imgUrl
+        }
+
+        return order
+      })
     }
-    filterProductsById()
-  }, [orders, products])
+  }
+
+  const imageOrders = useMemo(
+    () => filterProductsById(orders, products),
+    [orders, products]
+  )
 
   const filteredOrders = ordersById.filter((order) => order.id === Number(id))
 
@@ -64,7 +65,7 @@ const OrderResumeById = ({ id, isLoading, orders }) => {
                     height={70}
                     className=' place-self-start'
                     src={convertToWebp(item.imgUrl)}
-                    alt={`Item Image of ${item.title}`}
+                    alt={`Item del producto - ${item.title}`}
                   />
                   <div className='flex w-full sm:pl-2'>
                     <div className='w-full text-sm sm:text-base py-4'>
