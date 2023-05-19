@@ -8,6 +8,8 @@ const LayoutPage = ({ children, img }) => {
         <Image
           src={`/${img}`}
           fill
+          quality={60}
+          priority
           alt='Contact Background Image'
           style={{ objectFit: 'cover' }}
         />

@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useSelector } from 'react-redux'
 import Link from 'next/link'
@@ -40,18 +40,22 @@ const CheckoutForm = () => {
   const [shipping, setShipping] = useState(null)
   const router = useRouter()
 
-  const subTotal = cartItems.reduce((acc, item) => {
-    return acc + item.price * item.quantity
-  }, 0)
+  const subTotal = useMemo(() => {
+    return cartItems.reduce((acc, item) => {
+      return acc + item.price * item.quantity
+    }, 0)
+  }, [cartItems])
 
-  const items = cartItems.map((product) => {
-    return {
-      title: product.name,
-      quantity: product.quantity,
-      unitPrice: product.price,
-      productId: product.id
-    }
-  })
+  const items = useMemo(() => {
+    return cartItems.map((product) => {
+      return {
+        title: product.name,
+        quantity: product.quantity,
+        unitPrice: product.price,
+        productId: product.id
+      }
+    })
+  }, [cartItems])
 
   useEffect(() => {
     if (!currentUser) {

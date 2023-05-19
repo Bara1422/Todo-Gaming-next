@@ -3,9 +3,7 @@
 
 import React, { useCallback, useMemo, useState } from 'react'
 import { Toaster, toast } from 'react-hot-toast'
-
 import { useAppDispatch } from '../redux/hooks'
-
 import { addCartItem } from '@/app/redux/features/cartSlice'
 import SectionButton from './SectionButton'
 import ProductCard from './ProductCard'
