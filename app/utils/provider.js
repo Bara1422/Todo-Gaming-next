@@ -9,11 +9,11 @@ function Provider({ children }) {
     defaultOptions: { queries: { staleTime: 5000 } }
   })
   return (
-    <AxiosProvider>
-      <QueryClientProvider client={queryClient}>
+    <QueryClientProvider client={queryClient}>
+      <AxiosProvider>
         <AuthProvider>{children}</AuthProvider>
-      </QueryClientProvider>
-    </AxiosProvider>
+      </AxiosProvider>
+    </QueryClientProvider>
   )
 }
 

@@ -7,7 +7,6 @@ import { toggleCartHidden } from '@/app/redux/features/cartSlice'
 
 const CartContainer = () => {
   const dispatch = useDispatch()
-
   const cartItems = useSelector((state) => state.cart.cartItems)
 
   const calculateQuantity = (items) => {

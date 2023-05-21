@@ -51,13 +51,14 @@ const LoginForm = () => {
       {error && <Toaster position='bottom-center' />}
       <FormStyled onSubmit={handleSubmit(onSubmit)}>
         <div className=' pt-7 px-7 pb-2 rounded-md bg-white shadow-lg w-full gap-3 flex flex-col text-black'>
-          <label htmlFor='email' className='font-bold px-1'>
+          <label htmlFor='emailLogin' className='font-bold px-1'>
             Email:
           </label>
           <div className='flex items-center justify-start flex-col relative bg-gray-100 rounded-2xl text-[#7d7d7d] px-1 shadow-lg focus:bg-white focus:outline-0'>
             <input
               className='w-full border-none caret-[#ff441f] p-4 rounded-t-2xl bg-transparent h-6 block text-[#7d7d7d] focus:outline-none focus:border-black'
               type='email'
+              id='emailLogin'
               {...register('email', emailValidation)}
             />
           </div>
@@ -67,13 +68,14 @@ const LoginForm = () => {
             </span>
           )}
 
-          <label htmlFor='password' className='font-bold px-1'>
+          <label htmlFor='passwordLogin' className='font-bold px-1'>
             Password:
           </label>
           <div className='flex items-center justify-start flex-col relative bg-gray-100 rounded-2xl text-[#7d7d7d] px-1 shadow-lg focus:bg-white focus:outline-0'>
             <input
               className='w-full border-none caret-[#ff441f] p-4 rounded-t-2xl bg-transparent h-6 block text-[#7d7d7d] focus:outline-none focus:border-black'
               type='password'
+              id='passwordLogin'
               {...register('password', passwordValidation)}
             />
           </div>

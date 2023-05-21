@@ -2,10 +2,15 @@ import { useEffect, useState } from 'react'
 import { useGetProducts, useOrdersById } from './useCategories'
 import { useAxios } from '../context/AxiosContext'
 import { useQuery } from '@tanstack/react-query'
+import { useAuth } from '../context/AuthContext'
+import { authData } from '../utils/safeGetLocalStorage'
 
 export const useOrdersWithProducts = () => {
+  const { currentUser } = useAuth()
   const { data: products, isLoading: productsLoading } = useGetProducts()
-  const { data: ordersId, isLoading: ordersLoading } = useOrdersById()
+  const { data: ordersId, isLoading: ordersLoading } = useOrdersById(
+    currentUser?.userId || authData?.userId
+  )
 
   const [ordersWithProducts, setOrdersWithProducts] = useState([])
 

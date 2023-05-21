@@ -21,7 +21,7 @@ const ProductCard = ({ product, addToOrder }) => {
             }}
           />
         </div>
-        <h5 className='p-1   sm:text-base'>{product.name}</h5>
+        <h3 className='p-1   sm:text-base'>{product.name}</h3>
         <p className='text-green-600 font-bold'>{formatPrice(product.price)}</p>
         <button
           className='m-2 text-white h-auto rounded-lg p-2 w-48 cursor-pointer bg-black text-center hover:opacity-70 active:opacity-100 z-20'

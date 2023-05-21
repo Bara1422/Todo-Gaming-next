@@ -1,44 +1,26 @@
 'use client'
 
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState, Suspense, lazy } from 'react'
 import { useForm } from 'react-hook-form'
 import { useSelector } from 'react-redux'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import {
-  Button,
-  Modal,
-  ModalBody,
-  ModalCloseButton,
-  ModalContent,
-  ModalFooter,
-  ModalHeader,
-  ModalOverlay,
-  Spinner,
-  Text,
-  useDisclosure
-} from '@chakra-ui/react'
-
+import { Modal, ModalOverlay, Spinner, useDisclosure } from '@chakra-ui/react'
 import CardSummary from './CardSummary'
 import FormStyled from './FormStyled'
 import { useAuth } from '@/app/context/AuthContext'
 import { useCreateOrder } from '../hooks/useCreateOrder'
-import { formatPrice } from '@/data'
-import { useAppDispatch } from '../redux/hooks'
-import { resetCart } from '../redux/features/cartSlice'
 import CustomButton from './CustomButton'
-import ItemsInThePurchase from './ItemsInThePurchase'
 import CheckoutFormIndex from './CheckoutFormInput'
+import { useRouter } from 'next/navigation'
 
 const COSTOENVIO = 250
+const LazyModalContent = lazy(() => import('./ModalContentSection'))
 const CheckoutForm = () => {
   const { currentUser } = useAuth()
-  const dispatch = useAppDispatch()
+  const router = useRouter()
   const { isOpen, onOpen, onClose } = useDisclosure()
   const { createOrder, initPoint, isLoading } = useCreateOrder()
   const cartItems = useSelector((state) => state.cart.cartItems)
   const [shipping, setShipping] = useState(null)
-  const router = useRouter()
 
   const subTotal = useMemo(() => {
     return cartItems.reduce((acc, item) => {
@@ -83,17 +65,6 @@ const CheckoutForm = () => {
     onOpen()
   }
 
-  const handleCart = () => {
-    dispatch(resetCart())
-    router.push('/my-orders')
-  }
-
-  const onPurcharse = () => {
-    window.open(initPoint)
-    onClose()
-    handleCart()
-  }
-
   return (
     <FormStyled onSubmit={handleSubmit(onSubmit)}>
       <div className=' p-7 rounded-md bg-white shadow-lg w-full gap-3 flex flex-col text-black'>
@@ -118,48 +89,19 @@ const CheckoutForm = () => {
         </CustomButton>
       </div>
 
-      <Modal onClose={onClose} isOpen={isOpen}>
-        <ModalOverlay />
-        <ModalContent color='black'>
-          <ModalHeader fontSize='3xl'>
-            Verifica que los datos sean correctos
-          </ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <Text fontSize='lg'>
-              <span className='font-semibold text-xl'>Direccion:</span>{' '}
-              {shipping?.domicilio}
-            </Text>
-            <Text fontSize='lg'>
-              <span className='font-semibold text-xl'>Localidad: </span>
-              {shipping?.localidad}
-            </Text>
-            <Text fontSize='xl'>
-              <span className='font-semibold'>Productos:</span>{' '}
-              <span className='flex flex-col gap-2'>
-                {items.map((product, index) => (
-                  <ItemsInThePurchase product={product} key={index} />
-                ))}
-              </span>
-            </Text>
-            <Text fontSize='2xl' pt={4}>
-              <span className='font-bold'>Subtotal:</span>{' '}
-              {formatPrice(subTotal)}
-            </Text>
-          </ModalBody>
-
-          <ModalFooter>
-            <Button colorScheme='blue' mr={3} onClick={onClose}>
-              Cerrar
-            </Button>
-            <Link href='/my-orders'>
-              <Button colorScheme='green' onClick={onPurcharse}>
-                Pagar
-              </Button>
-            </Link>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
+      <Suspense>
+        <Modal onClose={onClose} isOpen={isOpen}>
+          <ModalOverlay />
+          <LazyModalContent
+            shipping={shipping}
+            items={items}
+            subTotal={subTotal}
+            initPoint={initPoint}
+            onClose={onClose}
+            router={router}
+          />
+        </Modal>
+      </Suspense>
     </FormStyled>
   )
 }
