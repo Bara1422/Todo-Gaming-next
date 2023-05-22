@@ -69,7 +69,7 @@ const LoginForm = () => {
           )}
 
           <label htmlFor='passwordLogin' className='font-bold px-1'>
-            Password:
+            Contraseña:
           </label>
           <div className='flex items-center justify-start flex-col relative bg-gray-100 rounded-2xl text-[#7d7d7d] px-1 shadow-lg focus:bg-white focus:outline-0'>
             <input
