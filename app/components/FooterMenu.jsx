@@ -5,7 +5,7 @@ import SmoothScrollLink from './SmoothScrollLink'
 
 const FooterMenu = () => {
   return (
-    <div className='text-white text-end flex flex-col justify-center items-end'>
+    <div className='text-white text-end flex flex-col justify-center items-end pr-3'>
       <h3 className='underline'>Menú</h3>
       <ul>
         <li className='hover:text-amethyst-600'>
