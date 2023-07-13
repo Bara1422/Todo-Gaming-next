@@ -16,6 +16,7 @@ const LoginForm = () => {
     handleSubmit,
     reset,
     register,
+    setValue,
     formState: { errors }
   } = useForm()
 
@@ -25,6 +26,11 @@ const LoginForm = () => {
   const onSubmit = (data) => {
     login(data.email, data.password)
     reset()
+  }
+
+  const setUserTest = () => {
+    setValue('email', 'c@c.com')
+    setValue('password', '12345')
   }
 
   useEffect(() => {
@@ -50,8 +56,8 @@ const LoginForm = () => {
     <>
       {error && <Toaster position='bottom-center' />}
       <FormStyled onSubmit={handleSubmit(onSubmit)}>
-        <div className=' pt-7 px-7 pb-2 rounded-md bg-white shadow-lg w-full gap-3 flex flex-col text-black'>
-          <label htmlFor='emailLogin' className='font-bold px-1'>
+        <div className='flex flex-col w-full gap-3 pb-2 text-black bg-white rounded-md shadow-lg pt-7 px-7'>
+          <label htmlFor='emailLogin' className='px-1 font-bold'>
             Email:
           </label>
           <div className='flex items-center justify-start flex-col relative bg-gray-100 rounded-2xl text-[#7d7d7d] px-1 shadow-lg focus:bg-white focus:outline-0'>
@@ -63,12 +69,12 @@ const LoginForm = () => {
             />
           </div>
           {errors.email && (
-            <span className='text-red-600 font-semibold pl-1'>
+            <span className='pl-1 font-semibold text-red-600'>
               {errors.email.message}
             </span>
           )}
 
-          <label htmlFor='passwordLogin' className='font-bold px-1'>
+          <label htmlFor='passwordLogin' className='px-1 font-bold'>
             Contraseña:
           </label>
           <div className='flex items-center justify-start flex-col relative bg-gray-100 rounded-2xl text-[#7d7d7d] px-1 shadow-lg focus:bg-white focus:outline-0'>
@@ -80,7 +86,7 @@ const LoginForm = () => {
             />
           </div>
           {errors.password && (
-            <span className='text-red-600 font-semibold pl-1'>
+            <span className='pl-1 font-semibold text-red-600'>
               {errors.password.message}
             </span>
           )}
@@ -89,14 +95,20 @@ const LoginForm = () => {
               {loading ? <Spinner size='sm' /> : 'Ingresar'}
             </CustomButton>
           </div>
+          <button
+            onClick={setUserTest}
+            className='w-1/2 mx-auto font-semibold transition-transform border-2 rounded-md hover:border-black '
+          >
+            User de prueba
+          </button>
 
-          <div className='flex items-center justify-center p-2 gap-2'>
+          <div className='flex items-center justify-center gap-2 p-2'>
             <span>
               <p>¿Todavia no tienes cuenta?</p>
             </span>
             <Link href='/signin'>
               <button
-                className='text-red-600 ml-1 cursor-pointer hover:underline'
+                className='ml-1 text-red-600 cursor-pointer hover:underline'
                 aria-label='Registrarte'
               >
                 <p>Registrarte</p>
