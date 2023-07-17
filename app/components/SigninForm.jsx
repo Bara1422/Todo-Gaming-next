@@ -29,8 +29,19 @@ const SigninForm = () => {
   }
 
   const onSubmit = async (data) => {
-    await signin(data.nombre, data.email, data.password)
-    reset()
+    try {
+      await signin(data.nombre, data.email, data.password)
+      reset()
+    } catch (error) {
+      toast.error(error.message, {
+        style: {
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+          fontWeight: '700'
+        }
+      })
+    }
   }
 
   useEffect(() => {
@@ -50,9 +61,9 @@ const SigninForm = () => {
     <>
       {error && <Toaster position='bottom-center' />}
       <FormStyled onSubmit={handleSubmit(onSubmit)}>
-        <div className=' pt-7 px-7 pb-2 rounded-md bg-white shadow-lg w-full gap-3 flex flex-col text-black'>
+        <div className='flex flex-col w-full gap-3 pb-2 text-black bg-white rounded-md shadow-lg pt-7 px-7'>
           <div className='flex flex-col gap-3'>
-            <label htmlFor='nombreSignin' className='font-bold px-1'>
+            <label htmlFor='nombreSignin' className='px-1 font-bold'>
               Nombre:
             </label>
             <div className='flex items-center justify-start flex-col relative bg-gray-100 rounded-2xl text-[#7d7d7d] px-1 shadow-lg focus:bg-white focus:outline-0'>
@@ -65,12 +76,12 @@ const SigninForm = () => {
               />
             </div>
             {errors.nombre && (
-              <span className='text-red-600 font-semibold pl-1'>
+              <span className='pl-1 font-semibold text-red-600'>
                 Este campo es requerido
               </span>
             )}
 
-            <label htmlFor='emailSignin' className='font-bold px-1'>
+            <label htmlFor='emailSignin' className='px-1 font-bold'>
               Email:
             </label>
             <div className='flex items-center justify-start flex-col relative bg-gray-100 rounded-2xl text-[#7d7d7d] px-1 shadow-lg focus:bg-white focus:outline-0'>
@@ -88,12 +99,12 @@ const SigninForm = () => {
               />
             </div>
             {errors.email && (
-              <span className='text-red-600 font-semibold pl-1'>
+              <span className='pl-1 font-semibold text-red-600'>
                 {errors.email.message}
               </span>
             )}
 
-            <label htmlFor='passwordSignin' className='font-bold px-1'>
+            <label htmlFor='passwordSignin' className='px-1 font-bold'>
               Contraseña:
             </label>
             <div className='flex items-center justify-start flex-col relative bg-gray-100 rounded-2xl text-[#7d7d7d] px-1 shadow-lg focus:bg-white focus:outline-0'>
@@ -111,23 +122,23 @@ const SigninForm = () => {
               />
             </div>
             {errors.password && (
-              <span className='text-red-600 font-semibold pl-1'>
+              <span className='pl-1 font-semibold text-red-600'>
                 {errors.password.message}
               </span>
             )}
             <div className='flex items-center justify-center p-2'>
-              <CustomButton>
+              <CustomButton disabled={loading}>
                 {loading ? <Spinner size='sm' /> : 'Registrate'}
               </CustomButton>
             </div>
 
-            <div className='flex items-center justify-center p-2 gap-2'>
+            <div className='flex items-center justify-center gap-2 p-2'>
               <span>
                 <p>Ya tienes cuenta?</p>
               </span>
               <Link href='/login'>
                 <button
-                  className='text-red-600 ml-1 cursor-pointer hover:underline'
+                  className='ml-1 text-red-600 cursor-pointer hover:underline'
                   aria-label='Ingresar'
                 >
                   <p>Ingresar</p>

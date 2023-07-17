@@ -22,6 +22,7 @@ const ItemsGrid = ({ cates }) => {
       return product
     })
   })
+
   const productsMapped = categoriesProducts?.flatMap((product) => product)
 
   const addToOrder = (component) => {
@@ -50,16 +51,15 @@ const ItemsGrid = ({ cates }) => {
   return (
     <>
       <Toaster position='bottom-center' />
-      {/* {catesLoading && <Spinner color='black' />} */}
-      <div className='grid  md:grid-cols-2 lg:grid-cols-4 gap-3 mt-4 items-center justify-around mb-5 md:flex-wrap'>
-        {/* {!catesLoading && ( */}
+
+      <div className='grid items-center justify-around gap-3 mt-4 mb-5 md:grid-cols-2 lg:grid-cols-4 md:flex-wrap'>
         <button
           onClick={handleResetSection}
-          className='flex w-52 text-gray-800 bg-gray-200 gap-3 items-center justify-center font-bold shadow-md rounded-2xl p-4 cursor-pointer'
+          className='flex items-center justify-center gap-3 p-4 font-bold text-gray-800 bg-gray-200 shadow-md cursor-pointer w-52 rounded-2xl'
         >
           <p>Todos</p>
         </button>
-        {/* )} */}
+
         {cates?.result?.map((section) => (
           <SectionButton
             key={section.id}
@@ -69,7 +69,7 @@ const ItemsGrid = ({ cates }) => {
           />
         ))}
       </div>
-      <div className='grid mx-auto grid-cols-1 md:grid-cols-2 lg:grid-cols-3 text-center justify-items-center gap-5 p-6 '>
+      <div className='grid grid-cols-1 gap-5 p-6 mx-auto text-center md:grid-cols-2 lg:grid-cols-3 justify-items-center '>
         {filteredProducts?.map((product) => (
           <ProductCard
             product={product}

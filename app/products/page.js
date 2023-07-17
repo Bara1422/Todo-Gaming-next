@@ -14,7 +14,7 @@ const Products = async () => {
 
   return (
     <div className='min-h-[inherit] m-0 sm:pt-36 pt-28 flex flex-col items-center select-none bg-slate-300 pb-[130px]'>
-      <h2 className='text-black text-4xl text-center font-bold'>
+      <h2 className='text-4xl font-bold text-center text-black'>
         NUESTROS PRODUCTOS
       </h2>
 

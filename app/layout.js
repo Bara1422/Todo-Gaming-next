@@ -1,4 +1,3 @@
-import { Providers } from '@/app/redux/provider'
 import Footer from './components/Footer'
 import Navbar from './components/Navbar'
 import './globals.css'
@@ -19,18 +18,16 @@ export default function RootLayout({ children }) {
   return (
     <html lang='en'>
       <Provider>
-        <Providers>
-          <body
-            className={`${inter.className} bg-[#111] text-white min-h-screen `}
-          >
-            <ChakraProviders>
-              <Navbar />
-              <Order />
-              {children}
-              <Footer />
-            </ChakraProviders>
-          </body>
-        </Providers>
+        <body
+          className={`${inter.className} bg-[#111] text-white min-h-screen `}
+        >
+          <ChakraProviders>
+            <Navbar />
+            <Order />
+            {children}
+            <Footer />
+          </ChakraProviders>
+        </body>
       </Provider>
     </html>
   )

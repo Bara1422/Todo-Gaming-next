@@ -3,6 +3,7 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { AxiosProvider } from '@/app/context/AxiosContext'
 import { AuthProvider } from '@/app/context/AuthContext'
+import { Providers } from '../redux/provider'
 
 function Provider({ children }) {
   const queryClient = new QueryClient({
@@ -11,7 +12,9 @@ function Provider({ children }) {
   return (
     <QueryClientProvider client={queryClient}>
       <AxiosProvider>
-        <AuthProvider>{children}</AuthProvider>
+        <AuthProvider>
+          <Providers>{children}</Providers>
+        </AuthProvider>
       </AxiosProvider>
     </QueryClientProvider>
   )

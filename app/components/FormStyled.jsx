@@ -4,7 +4,7 @@ const FormStyled = ({ children, onSubmit }) => {
   return (
     <form
       action=''
-      className='mt-16 bg-white rounded-2xl md:w-[400px] w-full max-w-[400px]  sm:min-w-[400px] shadow-lg flex flex-col'
+      className='mt-16 bg-white rounded-2xl md:w-[400px] w-full max-w-[400px]  sm:min-w-[400px] shadow-lg flex flex-col landscape:mb-36'
       onSubmit={onSubmit}
     >
       {children}

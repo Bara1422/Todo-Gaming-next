@@ -5,9 +5,9 @@ import Image from 'next/image'
 
 const ProductCard = ({ product, addToOrder }) => {
   return (
-    <div className='flex justify-center items-center text-black'>
+    <div className='flex items-center justify-center text-black'>
       <div className='max-h-[300px] h-[300px] relative mx-auto bg-no-repeat filter max-w-[18rem] flex flex-col mt-1 justify-end items-center bg-white shadow-md rounded-md hover:shadow-lg hover:mt-0 hover:cursor-default hover:filter-none contrast-75 hover:contrast-100 '>
-        <div className='absolute top-3 max-w-full h-32 w-32 max-h-36 '>
+        <div className='absolute w-32 h-32 max-w-full top-3 max-h-36 '>
           <Image
             src={convertToWebp(product.imgUrl)}
             alt={`Image of ${product.name}`}
@@ -21,10 +21,10 @@ const ProductCard = ({ product, addToOrder }) => {
             }}
           />
         </div>
-        <h3 className='p-1   sm:text-base'>{product.name}</h3>
-        <p className='text-green-600 font-bold'>{formatPrice(product.price)}</p>
+        <h3 className='p-1 sm:text-base'>{product.name}</h3>
+        <p className='font-bold text-green-600'>{formatPrice(product.price)}</p>
         <button
-          className='m-2 text-white h-auto rounded-lg p-2 w-48 cursor-pointer bg-black text-center hover:opacity-70 active:opacity-100 z-20'
+          className='z-20 w-48 h-auto p-2 m-2 text-center text-white bg-black rounded-lg cursor-pointer hover:opacity-70 active:opacity-100'
           onClick={() => addToOrder(product)}
         >
           Agregar al carrito
